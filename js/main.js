@@ -140,10 +140,11 @@ var xmlhttp = new XMLHttpRequest();
                       $.each(data.Data, function(i, item) {
                          var time = item.published_on;
                          time = timeConverter(time);
-                         everything +=  "<div class='col-sm-12'><img src='" + item.imageurl + "' alt='fail' class='img-fluid'> </div>";
-                         everything +=  "<div class='col-sm-12'>" + time + '\xa0\xa0\xa0\xa0\xa0' +  "<a href=" + item.url + ' target="_blank">' + item.title + "</a><div style='font-size: 12px;'>" + item.body + "</div></div>";
+                         everything += "<div class='row' style='padding: 5px;'>";
+                         everything +=  "<div class='col-sm-12 col-md-2'> <img src='" + item.imageurl + "' alt='fail' class='img-fluid'> </div>";
+                         everything +=  "<div class='col-sm-12 col-md-10'>" + time + '\xa0\xa0\xa0\xa0\xa0' +  "<a href=" + item.url + ' target="_blank">' + item.title + "</a><div style='font-size: 12px;'>" + item.body + "</div></div>";
                          everything += "</div>";
-                      });
+                       });
                      
                       $("#allNews").html(everything);
                   })
