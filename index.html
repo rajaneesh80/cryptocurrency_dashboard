@@ -1,5 +1,5 @@
-
 <html lang="en">
+
 <head>
   
   <meta charset="utf-8">
@@ -10,14 +10,18 @@
 
   <title> Crypto_Currency_Dashboard </title>
 
+ 
+
   <!-- Bootstrap core CSS -->
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
   <!-- Custome CSS -->
   <link rel="stylesheet" href="css/style.css">
-  
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"> </script>
+
+ 
 
   <!-- Fontawesome core CSS -->
 
@@ -28,13 +32,13 @@
 
 </head>
 
-<body>
+<body onload="javascript:getNews()">
 
 <!--Navbar -->
 
     <nav class="mb-1 navbar navbar-expand-lg navbar-dark bg-dark">
 
-      <a class="navbar-brand" href="">
+      <a class="navbar-brand" href="index.html">
       <img src="img/logo.png" height="30" width="30" class="d-inline-block align-top"
       alt="">  Crypto_Currency_Dashboard 
       </a>
@@ -53,7 +57,7 @@
 
               <li class="nav-item active">
 
-                <a class="nav-link waves-effect waves-light" href=""> <i class="fas fa-home icon-nav"></i> Home <span class="sr-only"> (current) </a>
+                <a class="nav-link waves-effect waves-light" href="index.html"> <i class="fas fa-home icon-nav"></i> Home <span class="sr-only"> (current) </a>
  
               </li>
 
@@ -93,29 +97,112 @@
 
 <!-- Navbarbar end -->
 
+ <div class="container">
+    <div class="row">
+      <div id="lastUpdated" class="col-sm-12 col-md-12"> </div> 
+    </div> <!-- row  -->
+  </div> <!--container  -->
+
+<br>
+
+
 <!-- Bootstrap grid setup -->
 
- <div class="container">
-        <div class="row">
-
-            <div id="left_grid" class="col-sm-12 col-md-8">
-
-              <h1> h1 </h1>
-
-            </div> <!-- left_grid -->
-
-            <div id="right_grid" class="col-md-4 col-sm-12">
-
-              <h1> h1 </h1>
-
-            </div> <!-- right_grid  -->
-
-        </div> <!-- row  -->
-    </div> <!--container  -->
+<div class="container">
+  <div class="row">
+    <div id="#" class="col-sm-12 col-md-12">
+      <h3> Crypto currency latest label </h3>
+    </div>
+  </div> <!-- row  -->
+</div> <!--container  -->
 
 <!-- Bootstrap grid setup end -->
 
   <br/>
+<!--  Bootstrap grid setup for coins -->
+
+<div class="container">
+
+  <div class="row">
+    <div id="btc" class="col-sm-4 col-sm-12">
+      <h4><a href="index-bitcoin-2.html" target='' style='color:black;'>Bitcoin</a></h4>
+      <div id="btcTicker"><span id="btcArrow"></span> 1 BTC = $<span id="btcLast"></span></div>
+    </div>
+    <div id="eth" class="col-sm-4  col-sm-12">
+      <h4><a href="https://en.wikipedia.org/wiki/Ethereum" target='_blank' style='color:black;'>Ethereum</a></h4>
+      <div id="ethTicker"><span id="ethArrow"></span> 1 ETH = $<span id="ethLast"></span></div>
+    </div>
+    <div id="bch" class="col-sm-4  col-sm-12">
+      <h4><a href="https://en.wikipedia.org/wiki/Bitcoin_Cash" target='_blank' style='color:black;'>Bitcoin Cash</a></h4>
+      <div id="bchTicker"><span id="bchArrow"></span> 1 BCH = $<span id="bchLast"></span></div>
+    </div>
+  </div> <!-- row1  -->
+
+  <div class="row">
+    <div id="eos" class="col-sm-4 col-sm-12">
+      <h4><a href="https://en.wikipedia.org/wiki/EOS.IO" target='_blank' style='color:black;'>EOS</a></h4>
+      <div id="eosTicker"><span id="eosArrow"></span> 1 EOS = $<span id="eosLast"></span></div>
+    </div>
+    <div id="ltc" class="col-sm-4  col-sm-12">
+      <h4><a href="https://en.wikipedia.org/wiki/Litecoin" target='_blank' style='color:black;'>Litecoin</a></h4>
+      <div id="ltcTicker"><span id="ltcArrow"></span> 1 LTC = $<span id="ltcLast"></span></div>
+    </div>
+    <div id="xrp" class="col-sm-4  col-sm-12">
+      <h4><a href="https://en.wikipedia.org/wiki/Ripple_(payment_protocol)#XRP" target='_blank' style='color:black;'>XRP</a></h4>
+      <div id="xrpTicker"><span id="xrpArrow"></span> 1 XRP = $<span id="xrpLast"></span></div>
+    </div>
+  </div> <!-- row2  -->
+
+  <div class="row">
+    <div id="btc" class="col-sm-4 col-sm-12">
+      <h4><a href="https://en.wikipedia.org/wiki/Bitcoin" target='_blank' style='color:black;'>Bitcoin</a></h4>
+      <div id="btcTicker"><span id="btcArrow"></span> 1 BTC = $<span id="btcLast"></span></div>
+    </div>
+    <div id="eth" class="col-sm-4 col-sm-12">
+      <h4><a href="https://en.wikipedia.org/wiki/Ethereum" target='_blank' style='color:black;'>Ethereum</a></h4>
+      <div id="ethTicker"><span id="ethArrow"></span> 1 ETH = $<span id="ethLast"></span></div>
+    </div>
+    <div id="bch" class="col-sm-4 col-sm-12">
+      <h4><a href="https://en.wikipedia.org/wiki/Bitcoin_Cash" target='_blank' style='color:black;'>Bitcoin Cash</a></h4>
+      <div id="bchTicker"><span id="bchArrow"></span> 1 BCH = $<span id="bchLast"></span></div>
+    </div>
+  </div> <!-- row3  -->
+
+  <div class="row">
+    <div id="btc" class="col-sm-4 col-sm-12">
+      <h4><a href="https://en.wikipedia.org/wiki/Bitcoin" target='_blank' style='color:black;'>Bitcoin</a></h4>
+      <div id="btcTicker"><span id="btcArrow"></span> 1 BTC = $<span id="btcLast"></span></div>
+    </div>
+    <div id="eth" class="col-sm-4 col-sm-12">
+      <h4><a href="https://en.wikipedia.org/wiki/Ethereum" target='_blank' style='color:black;'>Ethereum</a></h4>
+      <div id="ethTicker"><span id="ethArrow"></span> 1 ETH = $<span id="ethLast"></span></div>
+    </div>
+    <div id="bch" class="col-sm-4 col-sm-12">
+      <h4><a href="https://en.wikipedia.org/wiki/Bitcoin_Cash" target='_blank' style='color:black;'>Bitcoin Cash</a></h4>
+      <div id="bchTicker"><span id="bchArrow"></span> 1 BCH = $<span id="bchLast"></span></div>
+    </div>
+  </div> <!-- row3  -->
+
+</div> <!--container  -->
+
+
+
+
+<!--  Bootstrap grid setup for coins end -->
+
+      <br>
+
+<!--  Bootstrap grid setup for latest news -->
+
+<div class="container">
+  <div class="row">
+    <h3> Latest News </h3>
+      <div id="allNews" class="col-sm-6 col-md-12"> Error No News loaded </div>
+  </div> <!-- row  -->
+</div> <!--container  -->
+
+<!--  Bootstrap grid setup for latest news -->
+
 
 <!-- FOOTER -->
 
@@ -137,6 +224,8 @@
 </footer>
 <!-- FOOTER End-->
 
+
+
   <!-- Bootstrap core JavaScript -->
 
  
@@ -151,8 +240,12 @@
       $('#year').text(new Date().getFullYear());
     </script>
 
-    <script src="js/main.js"> </script>
 
+
+    <script src="js/main.js"> </script>
+    
+
+    
  </body>
 </html>
 

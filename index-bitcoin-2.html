@@ -1,0 +1,117 @@
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+
+  <title> Crypto_Currency_Dashboard </title>
+
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+
+<!-- Bootstrap core CSS -->
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <!-- Custome CSS -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"> </script>
+
+ 
+
+  <!-- Fontawesome core CSS -->
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+    integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+  
+
+</head>
+
+<body>
+
+<!--Navbar -->
+
+<nav class="mb-1 navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="index.html"><img src="img/logo.png" height="30" width="30" class="d-inline-block align-top" alt="">Crypto_Currency_Dashboard</a>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
+
+    <span class="navbar-toggler-icon"></span>
+
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
+    <ul class="navbar-nav ml-auto nav-flex-icons">
+      <li class="nav-item active">
+        <a class="nav-link waves-effect waves-light" href="index.html"> <i class="fas fa-home icon-nav"></i> Home <span class="sr-only"> (current) </a>
+        </li>
+      </ul>
+  </div>
+</nav>
+
+<svg width="960" height="500"> </svg>
+<h1> Bitcoin Prices in U.S. dollars</h1>
+
+<script>
+
+
+  var url = "https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&limit=200&aggregate=3&e=CCCAGG";
+
+
+  d3.json(url).get(function(error, d) {
+
+  	var data = d.Data;
+    data.forEach(function(d){ d.time = new Date(d.time * 1000) });
+
+    if (error) throw error;
+
+    var svg = d3.select("svg"),
+        margin = {top: 20, right: 20, bottom: 30, left: 50},
+        width = +svg.attr("width") - margin.left - margin.right,
+        height = +svg.attr("height") - margin.top - margin.bottom,
+        g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    var x = d3.scaleTime()
+        .range([0, width])
+
+    var y = d3.scaleLinear()
+        .range([height, 0]);
+
+    var line = d3.line()
+        .x(function(d) { return x(d.time); })
+        .y(function(d) { return y(d.close); });
+
+    x.domain(d3.extent(data, function(d) { return d.time; }));
+    y.domain(d3.extent(data, function(d) { return d.close; }));
+
+    g.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x))
+
+    g.append("g")
+        .call(d3.axisLeft(y))
+      .append("text")
+        .attr("fill", "#000")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 20)
+        .attr("text-anchor", "end")
+        .text("Price ($)");
+
+    g.append("path")
+        .datum(data)
+        .attr("fill", "none")
+        .attr("stroke", "#ffeaa7")
+        .attr("stroke-linejoin", "round")
+        .attr("stroke-linecap", "round")
+        .attr("stroke-width", 2)
+        .attr("d", line);
+  });
+
+    </script>
+  </body>
+</html>

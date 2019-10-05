@@ -3,3 +3,19 @@
 body {
   background-color: #F1F3F3    
 }
+
+
+.col-sm-4 {
+
+  padding: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  }
+
+.col-sm-12 {
+
+  padding: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  
+}
+  
+
