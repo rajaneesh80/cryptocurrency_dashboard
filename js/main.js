@@ -58,66 +58,66 @@ var xmlhttp = new XMLHttpRequest();
                     var oldVal = json["Data"][0]["close"];
                     if (Number(oldVal) < Number(document.getElementById("btcLast").innerHTML)) {
                        $("#btcTicker").css("color", "green");
-                       document.getElementById("btcArrow").innerHTML = "<img src='img/logo.png' style='max-width:12px;'>";
+                       document.getElementById("btcArrow").innerHTML = "<img src='img/arrow-g.png' style='max-width:12px;'>";
                     }
                     else {
                       $("#btcTicker").css("color", "red");
-                      document.getElementById("btcArrow").innerHTML = "<img src='img/logo.png' style='max-width:12px;'>";
+                      document.getElementById("btcArrow").innerHTML = "<img src='img/arrow-r.png' style='max-width:12px;'>";
                     }
                   }
                   else if (elementId == "ethLast") {
                     var oldVal = json["Data"][0]["close"];
                     if (Number(oldVal) < Number(document.getElementById("ethLast").innerHTML)) {
                        $("#ethTicker").css("color", "green");
-                       document.getElementById("ethArrow").innerHTML = "";
+                       document.getElementById("ethArrow").innerHTML = "<img src='img/arrow-g.png' style='max-width:12px;'>";
                     }
                     else {
                       $("#ethTicker").css("color", "red");
-                      document.getElementById("ethArrow").innerHTML = "";
+                      document.getElementById("ethArrow").innerHTML = "<img src='img/arrow-r.png' style='max-width:12px;'>";
                     }
                   }
                   else if (elementId == "bchLast") {
                     var oldVal = json["Data"][0]["close"];
                     if (Number(oldVal) < Number(document.getElementById("bchLast").innerHTML)) {
                        $("#bchTicker").css("color", "green");
-                       document.getElementById("bchArrow").innerHTML = "";
+                       document.getElementById("bchArrow").innerHTML = "<img src='img/arrow-g.png' style='max-width:12px;'>";
                     }
                     else {
                       $("#bchTicker").css("color", "red");
-                      document.getElementById("bchArrow").innerHTML = "";
+                      document.getElementById("bchArrow").innerHTML = "<img src='img/arrow-r.png' style='max-width:12px;'>";
                     }
                   }
                   else if (elementId == "eosLast") {
                     var oldVal = json["Data"][0]["close"];
                     if (Number(oldVal) < Number(document.getElementById("eosLast").innerHTML)) {
                        $("#eosTicker").css("color", "green");
-                       document.getElementById("eosArrow").innerHTML = "";
+                       document.getElementById("eosArrow").innerHTML = "<img src='img/arrow-g.png' style='max-width:12px;'>";
                     }
                     else {
                       $("#eosTicker").css("color", "red");
-                      document.getElementById("eosArrow").innerHTML = "";
+                      document.getElementById("eosArrow").innerHTML = "<img src='img/arrow-r.png' style='max-width:12px;'>";
                     }
                   }
                   else if (elementId == "ltcLast") {
                     var oldVal = json["Data"][0]["close"];
                     if (Number(oldVal) < Number(document.getElementById("ltcLast").innerHTML)) {
                        $("#ltcTicker").css("color", "green");
-                       document.getElementById("ltcArrow").innerHTML = "";
+                       document.getElementById("ltcArrow").innerHTML = "<img src='img/arrow-g.png' style='max-width:12px;'>";
                     }
                     else {
                       $("#ltcTicker").css("color", "red");
-                      document.getElementById("ltcArrow").innerHTML = "";
+                      document.getElementById("ltcArrow").innerHTML = "<img src='img/arrow-r.png' style='max-width:12px;'>";
                     }
                   }
                   else if (elementId == "xrpLast") {
                     var oldVal = json["Data"][0]["close"];
                     if (Number(oldVal) < Number(document.getElementById("xrpLast").innerHTML)) {
                        $("#xrpTicker").css("color", "green");
-                       document.getElementById("xrpArrow").innerHTML = "";
+                       document.getElementById("xrpArrow").innerHTML = "<img src='img/arrow-g.png' style='max-width:12px;'>";
                     }
                     else {
                       $("#xrpTicker").css("color", "red");
-                      document.getElementById("xrpArrow").innerHTML = "";
+                      document.getElementById("xrpArrow").innerHTML = "<img src='img/arrow-r.png' style='max-width:12px;'>";
                     }
                   }
                   else {
