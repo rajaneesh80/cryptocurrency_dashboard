@@ -57,8 +57,30 @@
     </div>
 </nav>
 
-<svg width="960" height="500"> </svg>
-<h1> Bitcoin Prices in U.S. dollars</h1>
+  <!-- Bootstrap grid setup -->
+
+<div class="container">
+  <div class="row">
+
+    <div id="left-charts" class="col-sm-12 col-md-6">
+      <div class="row">
+        <div id="chart-area" class="col-md-12"> <h3 class="text-center"> One Year Bitcoin Prices in U.S. Dollars </h3></div>
+      </div>
+    </div>
+
+      <div id="right-charts" class="col-sm-12 col-md-6">
+        <div class="row">
+          <div class="" id=""> </div>
+          <div class="" id=""></div>                    
+          <div class="" id=""></div>
+          <div class="" id=""></div>                   
+        </div>
+     </div>
+
+  </div>
+</div>
+
+
 
 <script>
 
@@ -73,11 +95,18 @@
 
     if (error) throw error;
 
-    var svg = d3.select("svg"),
-        margin = {top: 20, right: 20, bottom: 30, left: 50},
-        width = +svg.attr("width") - margin.left - margin.right,
-        height = +svg.attr("height") - margin.top - margin.bottom,
-        g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+var margin = { left:80, right:100, top:50, bottom:100 },
+    height = 500 - margin.top - margin.bottom, 
+    width = 600 - margin.left - margin.right;
+
+var svg = d3.select("#chart-area")
+    .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom).
+    call(responsivefy)
+var g = svg.append("g")
+        .attr("transform", "translate(" + margin.left + 
+            ", " + margin.top + ")");
 
     var x = d3.scaleTime()
         .range([0, width])
@@ -91,6 +120,8 @@
 
     x.domain(d3.extent(data, function(d) { return d.time; }));
     y.domain(d3.extent(data, function(d) { return d.close; }));
+
+    var bisectDate = d3.bisector(function(d) { return d.time; }).left;
 
     g.append("g")
         .attr("transform", "translate(0," + height + ")")
@@ -108,14 +139,42 @@
     g.append("path")
         .datum(data)
         .attr("fill", "none")
-        .attr("stroke", "#ffeaa7")
+        .attr("stroke", "#0d146e")
         .attr("stroke-linejoin", "round")
         .attr("stroke-linecap", "round")
         .attr("stroke-width", 2)
         .attr("d", line);
-  });
 
-    </script>
+    function responsivefy(svg) { 
+              
+            // Container is the DOM element, svg is appended. 
+            // Then we measure the container and find its 
+            // aspect ratio. 
+            const container = d3.select(svg.node().parentNode), 
+                width = parseInt(svg.style('width'), 12), 
+                height = parseInt(svg.style('height'), 10), 
+                aspect = width / height; 
+                  
+            // Add viewBox attribute to set the value to initial size 
+            // add preserveAspectRatio attribute to specify how to scale  
+            // and call resize so that svg resizes on page load 
+            svg.attr('viewBox', `0 0 ${width} ${height}`). 
+            attr('preserveAspectRatio', 'xMinYMid'). 
+            call(resize); 
+              
+            d3.select(window).on('resize.' + container.attr('id'), resize); 
+   
+            function resize() { 
+                const targetWidth = parseInt(container.style('width')); 
+                svg.attr('width', targetWidth); 
+                svg.attr('height', Math.round(targetWidth / aspect)); 
+            } 
+        } 
+
+});
+
+
+</script>
 
 
 
