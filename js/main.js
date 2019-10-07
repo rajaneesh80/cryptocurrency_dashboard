@@ -17,55 +17,59 @@ var xmlhttp = new XMLHttpRequest();
               
       xmlhttp.open("GET", url, true);
       xmlhttp.send();
-              
-              function parseJsonFromCryptoCompare(json) {
-                var time = "<i>Last Updated : " + Date() + "</i>";
-                var bitcoin = json["BTC"]["USD"];
-                var ether = json["ETH"]["USD"];
-                var bitcoinCash = json["BCH"]["USD"];
-                var EOS = json["EOS"]["USD"];
-                var litecoin = json["LTC"]["USD"];
-                var XRP = json["XRP"]["USD"];
-                document.getElementById("btcLast").innerHTML = bitcoin;
-                document.getElementById("ethLast").innerHTML = ether;
-                document.getElementById("bchLast").innerHTML = bitcoinCash;
-                document.getElementById("eosLast").innerHTML = EOS;
-                document.getElementById("ltcLast").innerHTML = litecoin;
-                document.getElementById("xrpLast").innerHTML = XRP;
-                document.getElementById("lastUpdated").innerHTML = time;
+
+function parseJsonFromCryptoCompare(json) {
+  var time = "<i>Last Updated : " + Date() + "</i>";
+  var bitcoin = json["BTC"]["USD"];
+  var ether = json["ETH"]["USD"];
+  var bitcoinCash = json["BCH"]["USD"];
+  var EOS = json["EOS"]["USD"];
+  var litecoin = json["LTC"]["USD"];
+  var XRP = json["XRP"]["USD"];
+
+  document.getElementById("btcLast").innerHTML = bitcoin;
+  document.getElementById("ethLast").innerHTML = ether;
+  document.getElementById("bchLast").innerHTML = bitcoinCash;
+  document.getElementById("eosLast").innerHTML = EOS;
+  document.getElementById("ltcLast").innerHTML = litecoin;
+  document.getElementById("xrpLast").innerHTML = XRP;
+  document.getElementById("lastUpdated").innerHTML = time;
                 
-                colorText("btcLast",urlHistoricalBtc);
-                colorText("ethLast",urlHistoricalEth);
-                colorText("bchLast",urlHistoricalEth);
-                colorText("eosLast",urlHistoricalEth);
-                colorText("ltcLast",urlHistoricalEth);
-                colorText("xrpLast",urlHistoricalXrp);
-              }
+  colorText("btcLast",urlHistoricalBtc);
+  colorText("ethLast",urlHistoricalEth);
+  colorText("bchLast",urlHistoricalEth);
+  colorText("eosLast",urlHistoricalEth);
+  colorText("ltcLast",urlHistoricalEth);
+  colorText("xrpLast",urlHistoricalXrp);
+}
               
-              function colorText(elementId, url) {
-                var xmlhttp = new XMLHttpRequest();
-                xmlhttp.onreadystatechange = function() {
-                  if (this.readyState == 4  &&  this.status == 200) {
-                    var json = JSON.parse(this.responseText);
-                    updateColors(json, elementId);
-                  }
-                };
-                xmlhttp.open("GET", url, true);
-                xmlhttp.send();
-                
-                function updateColors(json, elementId) {
-                  if (elementId == "btcLast") {
-                    var oldVal = json["Data"][0]["close"];
-                    if (Number(oldVal) < Number(document.getElementById("btcLast").innerHTML)) {
-                       $("#btcTicker").css("color", "green");
-                       document.getElementById("btcArrow").innerHTML = "<img src='img/arrow-g.png' style='max-width:12px;'>";
-                    }
-                    else {
-                      $("#btcTicker").css("color", "red");
-                      document.getElementById("btcArrow").innerHTML = "<img src='img/arrow-r.png' style='max-width:12px;'>";
-                    }
-                  }
-                  else if (elementId == "ethLast") {
+
+function colorText(elementId, url) {
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4  &&  this.status == 200) {
+      var json = JSON.parse(this.responseText);
+      updateColors(json, elementId);
+    }
+  };
+
+  xmlhttp.open("GET", url, true);
+  xmlhttp.send();
+
+    function updateColors(json, elementId) {
+
+      if (elementId == "btcLast") {
+        var oldVal = json["Data"][0]["close"];
+        if (Number(oldVal) < Number(document.getElementById("btcLast").innerHTML)) {
+          $("#btcTicker").css("color", "green");
+          document.getElementById("btcArrow").innerHTML = "<img src='img/arrow-g.png' style='max-width:12px;'>";
+        }
+        else {
+          $("#btcTicker").css("color", "red");
+          document.getElementById("btcArrow").innerHTML = "<img src='img/arrow-r.png' style='max-width:12px;'>";
+        }
+      }
+      else if (elementId == "ethLast") {
                     var oldVal = json["Data"][0]["close"];
                     if (Number(oldVal) < Number(document.getElementById("ethLast").innerHTML)) {
                        $("#ethTicker").css("color", "green");
@@ -76,7 +80,8 @@ var xmlhttp = new XMLHttpRequest();
                       document.getElementById("ethArrow").innerHTML = "<img src='img/arrow-r.png' style='max-width:12px;'>";
                     }
                   }
-                  else if (elementId == "bchLast") {
+
+      else if (elementId == "bchLast") {
                     var oldVal = json["Data"][0]["close"];
                     if (Number(oldVal) < Number(document.getElementById("bchLast").innerHTML)) {
                        $("#bchTicker").css("color", "green");
@@ -87,7 +92,8 @@ var xmlhttp = new XMLHttpRequest();
                       document.getElementById("bchArrow").innerHTML = "<img src='img/arrow-r.png' style='max-width:12px;'>";
                     }
                   }
-                  else if (elementId == "eosLast") {
+
+      else if (elementId == "eosLast") {
                     var oldVal = json["Data"][0]["close"];
                     if (Number(oldVal) < Number(document.getElementById("eosLast").innerHTML)) {
                        $("#eosTicker").css("color", "green");
@@ -98,7 +104,8 @@ var xmlhttp = new XMLHttpRequest();
                       document.getElementById("eosArrow").innerHTML = "<img src='img/arrow-r.png' style='max-width:12px;'>";
                     }
                   }
-                  else if (elementId == "ltcLast") {
+
+      else if (elementId == "ltcLast") {
                     var oldVal = json["Data"][0]["close"];
                     if (Number(oldVal) < Number(document.getElementById("ltcLast").innerHTML)) {
                        $("#ltcTicker").css("color", "green");
@@ -109,7 +116,8 @@ var xmlhttp = new XMLHttpRequest();
                       document.getElementById("ltcArrow").innerHTML = "<img src='img/arrow-r.png' style='max-width:12px;'>";
                     }
                   }
-                  else if (elementId == "xrpLast") {
+
+      else if (elementId == "xrpLast") {
                     var oldVal = json["Data"][0]["close"];
                     if (Number(oldVal) < Number(document.getElementById("xrpLast").innerHTML)) {
                        $("#xrpTicker").css("color", "green");
@@ -120,42 +128,43 @@ var xmlhttp = new XMLHttpRequest();
                       document.getElementById("xrpArrow").innerHTML = "<img src='img/arrow-r.png' style='max-width:12px;'>";
                     }
                   }
-                  else {
-                    alert("ERROR: " + elementId);
-                  }
-                  
-                }
-              };
 
-
-  function getNews() {
-                  var url = "https://min-api.cryptocompare.com/data/v2/news/?lang=EN";
-                  url = encodeURI(url);
-              
-                  console.log(url);
-                  $.getJSON(url,function(data) {
+  else {
+  alert("ERROR: " + elementId);
+  }
                   
-                      var everything;
-                      everything = "";
-                      $.each(data.Data, function(i, item) {
-                         var time = item.published_on;
-                         time = timeConverter(time);
-                         everything += "<div class='row' style='padding: 5px;'>";
-                         everything +=  "<div class='col-sm-12 col-md-2'> <img src='" + item.imageurl + "' alt='fail' class='img-fluid'> </div>";
-                         everything +=  "<div class='col-sm-12 col-md-10'>" + time + '\xa0\xa0\xa0\xa0\xa0' +  "<a href=" + item.url + ' target="_blank">' + item.title + "</a><div style='font-size: 12px;'>" + item.body + "</div></div>";
-                         everything += "</div>";
-                       });
-                     
-                      $("#allNews").html(everything);
-                  })
-                  .done(function() {console.log('getJSON request succeeded'); })
-                  .fail(function(jqXHR, textStatus, errorThrown) {
-                      console.log('getJSON request failed! ' + textStatus);
-                      console.log("incoming"+jqXHR.responseText);
-                  })
-                  .always(function() {console.log('getJSON request ended!');
-                  });
-              }
+  }
+};
+
+function getNews() {
+  var url = "https://min-api.cryptocompare.com/data/v2/news/?lang=EN";
+  url = encodeURI(url);
+  console.log(url);
+
+  $.getJSON(url,function(data) {
+    var everything;
+    everything = "";
+      $.each(data.Data, function(i, item) {
+      var time = item.published_on;
+      time = timeConverter(time);
+      everything += "<div class='row' style='padding: 5px;'>";
+      everything +=  "<div class='col-sm-12 col-md-2'> <img src='" + item.imageurl + "' alt='fail' class='img-fluid'> </div>";
+      everything +=  "<div class='col-sm-12 col-md-10'>" + time + '\xa0\xa0\xa0\xa0\xa0' +  "<a href=" + item.url + ' target="_blank">' + item.title + "</a><div style='font-size: 12px;'>" + item.body + "</div></div>";
+      everything += "</div>";
+      });
+
+  $("#allNews").html(everything);
+  })
+  
+  .done(function() {console.log('getJSON request succeeded'); })
+
+  .fail(function(jqXHR, textStatus, errorThrown) {
+  console.log('getJSON request failed! ' + textStatus);
+  console.log("incoming"+jqXHR.responseText);
+  })
+
+  .always(function() {console.log('getJSON request ended!');});
+}
 
   function timeConverter(UNIX_timestamp){
       var a = new Date(UNIX_timestamp * 1000);
