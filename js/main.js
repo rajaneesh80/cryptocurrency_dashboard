@@ -154,8 +154,9 @@ function getNews() {
       });
 
   $("#allNews").html(everything);
-  })
   
+  })
+
   .done(function() {console.log('getJSON request succeeded'); })
 
   .fail(function(jqXHR, textStatus, errorThrown) {
