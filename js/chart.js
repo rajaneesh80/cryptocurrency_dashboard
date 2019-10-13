@@ -164,4 +164,53 @@ function timeConverter(UNIX_timestamp){
     return time;
 }
 
+(function getData() {
+  var url = "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC&tsyms=USD";
+  url = encodeURI(url);
+  console.log(url);
+
+  $.getJSON(url,function(data) {
+
+      var hbtc_crypto_data = '';
+      var lbtc_crypto_data = '';
+      var pcbtc_crypto_data = '';
+      var mcbtc_crypto_data = '';
+
+      $.each(data.RAW, function(key, value){
+
+        lbtc_crypto_data += value.USD.LOWDAY;
+        hbtc_crypto_data += value.USD.HIGHDAY;
+        pcbtc_crypto_data += value.USD.CHANGEPCT24HOUR;
+        mcbtc_crypto_data += value.USD.MKTCAP;
+
+      });
+
+      $('#btcHigh').html(hbtc_crypto_data);
+      $('#btcLow').html(lbtc_crypto_data);
+      $('#btcPct').html(pcbtc_crypto_data);
+      $('#btcMkc').html(mcbtc_crypto_data);
+
+    })
+
+  .done(function() {console.log('getJSON request succeeded'); })
+
+  .fail(function(jqXHR, textStatus, errorThrown) {
+  console.log('getJSON request failed! ' + textStatus);
+  console.log("incoming"+jqXHR.responseText);
+  })
+
+  .always(function() {console.log('getJSON request ended!');});
+})();
+
+  function yearTimeConverter(UNIX_timestamp){
+      var a = new Date(UNIX_timestamp * 1000);
+      var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      var year = a.getFullYear();
+      var month = months[a.getMonth()];
+      var date = a.getDate();
+
+      var time = date + ' ' + month + ' ' + year ;
+    return time;
+  }
+
 
