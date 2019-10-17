@@ -207,7 +207,7 @@ function getNews() {
           crypto_data += '<td class="text-center">'+ value.USD.CHANGEPCT24HOUR +' ' + '%'+'</td>';
           crypto_data += '<td class="text-center">'+ '$' + ' ' +value.USD.SUPPLY+'</td>';
           
-          crypto_data += '<td class="text-center">'+ '<img src="https://images.cryptocompare.com/sparkchart/'+key+'/USD/latest.png?ts=time_1">'+' </td>';
+          crypto_data += '<td class="text-center">'+ '<img src="https://images.cryptocompare.com/sparkchart/'+key+'/USD/latest.png?ts=time">'+' </td>';
           
           crypto_data += '</tr>';
       });

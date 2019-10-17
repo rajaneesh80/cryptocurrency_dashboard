@@ -1,5 +1,5 @@
 (function getData() {
-  var url = "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC,ETH,XRP,EOS,BCH,LINK,BNB,TRX,LTC,ETC,OKB&tsyms=USD";
+  var url = "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC,ETH,XRP,EOS,BCH,LINK,BNB,TRX,LTC,ETC,OKB&tsyms=USD&aggregate=2";
   url = encodeURI(url);
   console.log(url);
 
@@ -23,7 +23,7 @@
           crypto_data += '<td class="text-center">'+ value.USD.CHANGEPCT24HOUR +' ' + '%'+'</td>';
           crypto_data += '<td class="text-center">'+ '$' + ' ' +value.USD.SUPPLY+'</td>';
           
-          crypto_data += '<td class="text-center">'+ '<img src="https://images.cryptocompare.com/sparkchart/'+key+'/USD/latest.png?ts=time_1">'+' </td>';
+          crypto_data += '<td class="text-center">'+ '<img src="https://images.cryptocompare.com/sparkchart/'+key+'/USD/latest.png?ts=time">'+' </td>';
           
           crypto_data += '</tr>';
       });
