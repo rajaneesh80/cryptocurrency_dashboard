@@ -196,6 +196,10 @@ function getNews() {
         var time_1 = value.USD.LASTUPDATE ;
         time_1 = yearTimeConverter(time_1);
 
+        var time_2 = value.USD.LASTUPDATE ;
+        time_2 = timeConverter_1(time_2);
+        console.log(time_2);
+
           crypto_data += '<tr>';
 
           crypto_data += '<td class="text-center">'+key+'</td>';
@@ -207,7 +211,7 @@ function getNews() {
           crypto_data += '<td class="text-center">'+ value.USD.CHANGEPCT24HOUR +' ' + '%'+'</td>';
           crypto_data += '<td class="text-center">'+ '$' + ' ' +value.USD.SUPPLY+'</td>';
           
-          crypto_data += '<td class="text-center">'+ '<img src="https://images.cryptocompare.com/sparkchart/'+key+'/USD/latest.png?ts=time">'+' </td>';
+          crypto_data += '<td class="text-center">'+ '<img src="https://images.cryptocompare.com/sparkchart/'+key+'/USD/latest.png?ts=time_2">'+' </td>';
           
           crypto_data += '</tr>';
       });
@@ -239,6 +243,18 @@ function getNews() {
       var date = a.getDate();
 
       var time = date + ' ' + month + ' ' + year ;
+    return time;
+  }
+
+
+    function timeConverter_1(UNIX_timestamp){
+      var a = new Date(UNIX_timestamp * 1000);
+      var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      var year = a.getFullYear();
+      var month = months[a.getMonth()];
+      var date = a.getDate();
+
+      var time = year + '-' + month + '-' + date ;
     return time;
   }
 
