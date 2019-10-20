@@ -10,7 +10,24 @@
 
   <title> Crypto_Currency_Dashboard </title>
 
-  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <!-- print filter -->
+
+
+   <!-- jquery -->
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"> </script>
+  <!-- d3 version 3 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
+  <!-- crossfilter version 1 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crossfilter/1.3.12/crossfilter.min.js"></script>
+  <!-- dc version 2 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dc/2.1.8/dc.min.js"></script>
+  <!-- Q version 1 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/queue-async/1.0.7/queue.min.js"></script>
+
+
+
+
 
 <!-- Bootstrap core CSS -->
 
@@ -19,9 +36,7 @@
   <!-- Custome CSS -->
   <link rel="stylesheet" href="css/style.css">
 
-  <!-- jquery -->
-
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js"> </script>
+ 
 
  
 
@@ -60,11 +75,10 @@
             <a class="nav-link waves-effect waves-light" href="test.html"> <i class="fas fa-home icon-nav"></i> Table <span class="sr-only"> (current) </a>
           </li>
 
-           <li class="nav-item">
-            
-            <a class="nav-link waves-effect waves-light" href="index-bitcoin-dc.html"> <i class="fas fa-home icon-nav"></i> DC <span class="sr-only"> (current) </a>
-
+          <li class="nav-item">
+            <a class="nav-link waves-effect waves-light" href="bitcoin-dc.html"> <i class="fas fa-home icon-nav"></i> DC <span class="sr-only"> (current) </a>
           </li>
+
 
         </ul>
     </div>
@@ -90,7 +104,7 @@
 
     <div id="left-charts" class="col-sm-12 col-md-8">
       <div class="row">
-        <div id="chart-area" class="col-md-12"> <h3 class="text-center"> One Year Bitcoin Prices in U.S. Dollars </h3></div>
+        <div id="chart" class="col-md-12"> <h3 class="text-center"> One Year Bitcoin Prices in U.S. Dollars </h3></div>
       </div>
     </div>
 
@@ -105,7 +119,7 @@
 
           
 
-          <div id="hbtc" class="col-md-12 col-sm-12">
+          <div id="chart2" class="col-md-12 col-sm-12">
             <h4> Today's Highest BTC Value </h4>
             
             <div id=""> $ <span id="btcHigh"> </span> </div>
@@ -113,7 +127,7 @@
 
                              
           
-          <div id="btc" class="col-md-12 col-sm-12">
+          <div id="" class="col-md-12 col-sm-12">
             <h4> Today's Lowest BTC Value </h4>
             
             <div id="">  $ <span id="btcLow"> </span> </div>
@@ -133,8 +147,8 @@
             <div id=""> $ <span id="btcMkc"> </span> </div>
           </div>
 
-        </div>
-     </div>
+        </div> <!-- row -->
+     </div>  <!-- main -->
 
   </div>
 </div>
@@ -146,7 +160,7 @@
 
     <div id="left-charts" class="col-sm-12 col-md-8">
       <div class="row">
-        <div id="chart-area" class="col-md-12"> <h3 class="text-center"> Extra Grid </h3></div>
+        <div id="chart3" class="col-md-12"> <h3 class="text-center"> Extra Grid </h3></div>
       </div>
     </div>
 
@@ -203,7 +217,7 @@
 
 <!-- <script src="js/main.js"> </script> -->
 
-<script src="js/chart.js"> </script>
+<script src="js/test_dc.js"> </script>
 
 
 

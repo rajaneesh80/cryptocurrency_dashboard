@@ -14,7 +14,10 @@
 
         var time_2 = value.USD.LASTUPDATE ;
         time_2 = timeConverter_1(time_2);
+        console.log(time_2 );
 
+        // https://stackoverflow.com/questions/9461621/format-a-number-as-2-5k-if-a-thousand-or-more-otherwise-900
+        
         var twodigit = value.USD.MKTCAP;
         twodigit     = shortenLargeNumber(twodigit);
 
@@ -24,9 +27,10 @@
         var twodigitsup = value.USD.SUPPLY;
         twodigitsup     = shortenLargeNumber(twodigitsup);
 
+        /*
         var twodigitcurvalue = value.USD.PRICE;
         twodigitcurvalue     = shortenLargeNumber(twodigitcurvalue);
-
+        */
         var twodigitcurhigh = value.USD.HIGHDAY;
         twodigitcurhigh     = shortenLargeNumber(twodigitcurhigh);
 
@@ -37,7 +41,7 @@
 
           crypto_data += '<td class="text-center">'+key+'</td>';
           crypto_data += '<td class="text-center">'+ '<img src="https://www.cryptocompare.com' + '/'+value.USD.IMAGEURL+'?width=50'+'">'+' </td>';
-          crypto_data += '<td class="text-center">'+ '$' + ' ' + twodigitcurvalue+'</td>';
+          crypto_data += '<td class="text-center">'+ '$' + ' ' + value.USD.PRICE+'</td>';
           crypto_data += '<td class="text-center">'+ '$' + ' ' +twodigitcurhigh+'</td>';
           crypto_data += '<td class="text-center">'+ '$' + ' ' +twodigitcurlow+'</td>';
           crypto_data += '<td class="text-center">'+ '$' + ' ' + twodigit+'</td>';
@@ -156,3 +160,5 @@ function shortenLargeNumber(num, digits) {
 
 
 */
+
+//////

@@ -1,4 +1,4 @@
-// Bitcoinn 30 days chart  
+// Bitcoinn 30 days chart
 var url = "https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&limit=366&aggregate=3&e=CCCAGG";
 
 
@@ -214,3 +214,4 @@ function timeConverter(UNIX_timestamp){
   }
 
 
+///////

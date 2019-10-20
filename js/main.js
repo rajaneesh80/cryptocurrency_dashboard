@@ -246,7 +246,6 @@ function getNews() {
     return time;
   }
 
-
     function timeConverter_1(UNIX_timestamp){
       var a = new Date(UNIX_timestamp * 1000);
       var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
