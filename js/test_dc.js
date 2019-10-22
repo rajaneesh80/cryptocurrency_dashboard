@@ -1,10 +1,10 @@
 // Bitcoinn 30 days 
-var url = "https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&limit=5&aggregate=3&e=CCCAGG";
+var url = "https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&limit=30&aggregate=3&e=CCCAGG";
 
 d3.json(url).get(function(error, d) {
   var data = d.Data;
   data.forEach(function(d){
-    d.time = new Date(d.time * 1000);
+    d.time = new Date(d.time*1000);
   });
     if (error) throw error;
     //console.log(data)
@@ -12,7 +12,8 @@ var facts = crossfilter(data);
 console.log(facts)
 
 /// Close
-var dateDimension = facts.dimension(function(d){ return d.time; });
+var dateDimension = facts.dimension(function(d){return d.time;});
+
 var dateGroup = dateDimension.group().reduceSum(function(d){ return d.close; });
 
 var minDate = dateDimension.bottom(1)[0].time;
@@ -36,7 +37,12 @@ var lineChart= dc.lineChart("#chart")
     .dimension(dateDimension)
     .group(dateLowGroup ,"Low")
     .stack(dateHighGroup,"High")
-    .title(function(d){ return d.key + ': $'+d.value; })
+
+    .title(function(d){ 
+      var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      return d.key.getDate()+'-'+months[d.key.getMonth()]+'-'+d.key.getFullYear()+':'
+      + ': $'+d.value; })
+
     .yAxisLabel("Value in USD($)")
     .renderHorizontalGridLines(true)
     .renderArea(true)
@@ -57,14 +63,21 @@ var lineChart= dc.lineChart("#chart")
     .radius(50)
     .innerRadius(30)
     .renderLabel(false)
-    .title(function(d){ return d.key + ': $'+d.value; })
+
+     .title(function(d){ 
+      var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      return d.key.getDate()+'-'+months[d.key.getMonth()]+'-'+d.key.getFullYear()+':'
+      + ': $'+d.value; })
+
     .colors(d3.scale.category10())
     .transitionDuration(1500)
     .dimension(dateDimension)
     .group(dateGroup,"close")
+
     .legend(dc.legend().x(230).y(5).itemHeight(12).gap(5));
 
     ///
+    // https://stackoverflow.com/questions/15191258/properly-display-bin-width-in-barchart-using-dc-js-and-crossfilter-js
 
     var barChart = dc.barChart("#chart3")
     .width(680)
@@ -73,15 +86,46 @@ var lineChart= dc.lineChart("#chart")
     .brushOn(false)
     .dimension(dateDimension)
     .group(dateHighGroup,"High")
-    .title(function(d){ return d.key + ': $'+d.value; })
-    .x(d3.time.scale().domain([minDate, maxDate]))
     
-    .barPadding(0.5)
+    .title(function(d){ 
+      var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      return d.key.getDate()+'-'+months[d.key.getMonth()]+'-'+d.key.getFullYear()+':'
+      + ': $'+d.value; })
+
+    .x(d3.time.scale().domain([minDate, maxDate]))
+    .xUnits(dc.units.ordinal)
+    
+    //.barPadding(0.5)
     .yAxisLabel("This is the Y Axis!")
+    .xUnits(function(){return 30;})
+    .yAxisPadding("5%")
+    .gap(7)
+
     
 
     barChart.yAxis().ticks(4);
     barChart.xAxis().ticks(2);
+
+    //
+
+    var dataTable = dc.dataTable("#table1")
+      .width(1160)
+      .height(300)
+      .dimension(dateDimension)
+      .showGroups(false)
+      // .size(5)
+      .group(function(d){ return d.close; })
+
+      .columns([{label:'Time',format: function(d){var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+                                                          return d.time.getDate()+'-'+months[d.time.getMonth()]+'-'+d.time.getFullYear()+':';
+                                                        }},
+                      'close',
+                      'high',
+                      'low',
+                      'open'])
+
+      .sortBy(function(d){ return d.close; })
+      .order(d3.ascending);
 
    
 
@@ -89,5 +133,7 @@ var lineChart= dc.lineChart("#chart")
 dc.renderAll();
 
 });
+
+
 
  
