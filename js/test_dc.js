@@ -51,6 +51,9 @@ var lineChart= dc.lineChart("#chart")
 
     .brushOn(false)
     .renderDataPoints(true)
+    .elasticY(true);
+
+
    
     lineChart.yAxis().ticks(12);
     lineChart.xAxis().ticks(5);
@@ -99,9 +102,11 @@ var lineChart= dc.lineChart("#chart")
     .yAxisLabel("This is the Y Axis!")
     .xUnits(function(){return 30;})
     .yAxisPadding("5%")
-    .gap(7)
+    .gap(1)
+    .renderHorizontalGridLines(true).renderVerticalGridLines(true)
 
     
+  
 
     barChart.yAxis().ticks(4);
     barChart.xAxis().ticks(2);
@@ -117,7 +122,7 @@ var lineChart= dc.lineChart("#chart")
       .group(function(d){ return d.close; })
 
       .columns([{label:'Time',format: function(d){var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-                                                          return d.time.getDate()+'-'+months[d.time.getMonth()]+'-'+d.time.getFullYear()+':';
+                                                          return d.time.getDate()+'-'+months[d.time.getMonth()]+'-'+d.time.getFullYear();
                                                         }},
                       'close',
                       'high',

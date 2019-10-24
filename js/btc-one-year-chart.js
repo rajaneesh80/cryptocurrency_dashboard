@@ -1,4 +1,4 @@
-// Bitcoinn 30 days chart
+// Bitcoinn 360 days chart
 var url = "https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&limit=366&aggregate=3&e=CCCAGG";
 
 
@@ -13,11 +13,19 @@ var margin = { left:80, right:100, top:50, bottom:100 },
     height = 500 - margin.top - margin.bottom, 
     width = 600 - margin.left - margin.right;
 
+var tooltip = d3.select('body')
+.append('div')
+.style('position', 'absolute')
+.style('padding', '0 10px')
+.style('background', 'white')
+.style('opacity', 0)
+
 var svg = d3.select("#chart-area")
     .append("svg")
     .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom).
-    call(responsivefy)
+    .attr("height", height + margin.top + margin.bottom)
+    .call(responsivefy)
+    
 var g = svg.append("g")
         .attr("transform", "translate(" + margin.left + 
             ", " + margin.top + ")");
@@ -215,3 +223,4 @@ function timeConverter(UNIX_timestamp){
 
 
 ///////
+
