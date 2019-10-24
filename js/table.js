@@ -10,6 +10,7 @@
       $.each(data.RAW, function(key, value){
 
         var time_1 = value.USD.LASTUPDATE ;
+        console.log(value.USD.LASTUPDATE)
         time_1 = timeConverter(time_1);
 
         var time_2 = value.USD.LASTUPDATE ;
@@ -48,7 +49,7 @@
           crypto_data += '<td class="text-center">'+ twodigitper +' ' + '%'+'</td>';
           crypto_data += '<td class="text-center">'+ '$' + ' ' +twodigitsup+'</td>';
           
-          crypto_data += '<td class="text-center">'+ '<img src="https://images.cryptocompare.com/sparkchart/'+key+'/USD/latest.png?ts=time_2">'+' </td>';
+          crypto_data += '<td class="text-center">'+ '<img src="https://images.cryptocompare.com/sparkchart/'+key+'/USD/latest.png?ts=value.USD.LASTUPDATE">'+' </td>';
           
           crypto_data += '</tr>';
       });

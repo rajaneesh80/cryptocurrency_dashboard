@@ -11,7 +11,7 @@ d3.json(url).get(function(error, d) {
 var facts = crossfilter(data);
 console.log(facts)
 
-/// Close
+/// time
 var dateDimension = facts.dimension(function(d){return d.time;});
 
 var dateGroup = dateDimension.group().reduceSum(function(d){ return d.close; });
