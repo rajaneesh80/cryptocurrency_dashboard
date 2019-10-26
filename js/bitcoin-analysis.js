@@ -2,8 +2,8 @@ var gainOrLossChart = dc.pieChart('#gain-loss-chart');
 var fluctuationChart = dc.barChart('#fluctuation-chart');
 var quarterChart = dc.pieChart('#quarter-chart');
 var dayOfWeekChart = dc.rowChart('#day-of-week-chart');
-//var moveChart = dc.lineChart('#monthly-move-chart');
-//var volumeChart = dc.barChart('#monthly-volume-chart');
+var moveChart = dc.lineChart('#monthly-move-chart');
+var volumeChart = dc.barChart('#monthly-volume-chart');
 var monthlyBubbleChart = dc.bubbleChart('#yearly-bubble-chart');
 
 if (!navigator.onLine) {
@@ -11,13 +11,13 @@ if (!navigator.onLine) {
 }
 
 // Bitcoinn 30 days 
-var url = "https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&limit=100&aggregate=3&e=CCCAGG";
+var url = "https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&limit=366&aggregate=1&e=CCCAGG";
 
 d3.json(url).get(function(error, d) {
    var data = d.Data;
    for (var i = 0; i < data.length; i++) {
         //console.log(data[i].time);
-        
+    var numberFormat = d3.format('.2f');   
     }
     data.forEach(function(d){
       var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -55,6 +55,7 @@ var minDate = dateDimension.bottom(1)[0].time;
 var maxDate = dateDimension.top(1)[0].time;
 
 ////////
+
 // Dimension by month
 //https://stackoverflow.com/questions/47575119/how-to-get-month-name-from-an-html-date-input-value
 
@@ -228,6 +229,7 @@ gainOrLossChart
   .width(180) // (optional) define chart width, :default = 200
   .height(180) // (optional) define chart height, :default = 200
   .radius(80) // define pie radius
+  .innerRadius(10)
   .dimension(gainOrLoss ) // set dimension
   .group(gainOrLossGroup) // set group
 
@@ -298,7 +300,7 @@ gainOrLossChart
         .height(250)  // (optional) define chart height, :default = 200
         .transitionDuration(1500) // (optional) define chart transition duration, :default = 750
         .margins({top: 10, right: 50, bottom: 30, left: 40})
-        .dimension(dateDimension)
+        .dimension(monthlyDimension)
 
         //Bubble chart expect the groups are reduced to multiple values which would then be used
         //to generate x, y, and radius for each key (bubble) in the group
@@ -314,7 +316,7 @@ gainOrLossChart
         //* `.keyAccessor` Identifies the `X` value that will be applied against the `.x()` to identify pixel location
         //* `.valueAccessor` Identifies the `Y` value that will be applied agains the `.y()` to identify pixel location
         //* `.radiusValueAccessor` Identifies the value that will be applied agains the `.r()` determine radius size,
-        //*     by default this maps linearly to [0,100]
+        //*   by default this maps linearly to [0,100]
         .colorAccessor(function (d) {
             return d.value.absGain;
         })
@@ -345,6 +347,7 @@ gainOrLossChart
         .renderVerticalGridLines(true) // (optional) render vertical grid lines, :default=false
         .xAxisLabel('BTC Gain') // (optional) render an axis label below the x axis
         .yAxisLabel('BTC Gain %') // (optional) render a vertical axis lable left of the y axis
+
         //#### Labels and  Titles
         //Labels are displaed on the chart for each bubble. Titles displayed on mouseover.
         .renderLabel(true) // (optional) whether chart should render labels, :default = true
@@ -352,7 +355,8 @@ gainOrLossChart
             return p.key;
         })
         .renderTitle(true) // (optional) whether chart should render titles, :default = false
-       /* .title(function (p) {
+
+      /*  .title(function (p) {
             return [
                 p.key,
                 'Index Gain: ' + numberFormat(p.value.absGain),
@@ -360,6 +364,18 @@ gainOrLossChart
                 'Fluctuation / Index Ratio: ' + numberFormat(p.value.fluctuationPercentage) + '%'
             ].join('\n');
         })*/
+
+         .title(function (p) {
+            return [
+                p.key, 
+                'Index Gain: ' 
+                + numberFormat(p.value.absGain), 'Index Gain in Percentage: ' 
+                + numberFormat(p.value.percentageGain) 
+                + '%', 'Fluctuation / Index Ratio: ' 
+                + numberFormat(p.value.fluctuationPercentage) 
+                + '%'].join('\n');
+              })
+
         //#### Customize Axis
         //Set a custom tick format. Note `.yAxis()` returns an axis object, so any additional method chaining applies
         //to the axis, not the chart.
@@ -369,6 +385,7 @@ gainOrLossChart
 ///
 
     //#### Row Chart
+
     dayOfWeekChart
         .width(180)
         .height(180)
@@ -414,21 +431,79 @@ gainOrLossChart
         .renderHorizontalGridLines(true)
         // customize the filter displayed in the control span
         .filterPrinter(function (filters) {
-            var filter = filters[0], s = '';
+            var filter = filters[0], 
+            s = '';
             s += numberFormat(filter[0]) + '% -> ' + numberFormat(filter[1]) + '%';
             return s;
         });
 
+         // Customize axis
+        fluctuationChart.xAxis()
+        .tickFormat(function (v) { 
+          return v + '%'; 
+        });
+
+        fluctuationChart.yAxis().ticks(5);
+
 /////
 
-    // Customize axis
-    fluctuationChart.xAxis().tickFormat(
-        function (v) { return v + '%'; });
-    fluctuationChart.yAxis().ticks(5);
+  moveChart
+  .renderArea(true)
+  .width(990)
+  .height(200)
+  .transitionDuration(1000)
+  .margins({top: 30, right: 50, bottom: 25, left: 40})
+  .dimension(monthlyDimension)
+  // Specify a "range chart" to link its brush extent with the zoom of the current "focus chart"
+  .mouseZoomable(true) 
+  .rangeChart(volumeChart)
+  .x(d3.time.scale()
+  .domain([new Date(minDate), new Date(maxDate)]))
+  .round(d3.time.month.round)
+  .xUnits(d3.time.Months)
+  .elasticY(true)
+  .renderHorizontalGridLines(true) 
+  // ##### Legend
+  // Position the legend relative to the chart origin and specify items' height and separation.
+  .legend(dc.legend().x(800).y(10).itemHeight(13).gap(5)).brushOn(false) 
+  // Add the base layer of the stack with group. The second parameter specifies a series name for use in the
+  // legend.
+  // The `.valueAccessor` will be used for the base layer
+  .group(indexAvgByMonthGroup, 'Monthly Index Average')
+  .valueAccessor(function (d) {
+    return d.value.avg;
+  }) 
+  // Stack additional layers with `.stack`. The first paramenter is a new group.
+  // The second parameter is the series name. The third is a value accessor.
+  .stack(monthlyMoveGroup, 'Monthly Index Move', function (d) {
+    return d.value;
+  })
+  //.stack(monthlyMoveGroup)
+  // Title can be called by any stack layer.
+  .title(function (d) {
+    var value = d.value.avg ? d.value.avg : d.value;
 
-/////
+    if (isNaN(value)) {
+      value = 0;
+    }
 
- 
+    return dateFormat(d.key) + '\n' + numberFormat(value);
+  });
+
+  volumeChart
+  .width(990)
+  .height(40)
+  .margins({top: 0, right: 50, bottom: 20, left: 40})
+  .dimension(monthlyDimension)
+  .group(volumeByMonthGroup)
+  .centerBar(true)
+  .gap(1)
+  .x(d3.time.scale()
+  .domain([new Date(minDate), new Date(maxDate)]))
+  .round(d3.time.month.round)
+  .alwaysUseRounding(true)
+  //.xUnits(d3.time.Months)
+  .yAxisLabel('Billions $');
 
 
 dc.renderAll();

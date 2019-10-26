@@ -149,6 +149,7 @@ d3.csv('https://www.quandl.com/api/v3/datasets/BCHARTS/COINFALCONEUR.csv?api_key
     return day + '.' + name[day];
   });
   var dayOfWeekGroup = dayOfWeek.group();
+
   monthlyBubbleChart
   /* dc.bubbleChart('#yearly-bubble-chart', 'chartGroup') */
   // (_optional_) define chart width, `default = 200`
@@ -178,7 +179,12 @@ d3.csv('https://www.quandl.com/api/v3/datasets/BCHARTS/COINFALCONEUR.csv?api_key
   //   by default this maps linearly to [0,100]
   .radiusValueAccessor(function (p) {
     return p.value.fluctuationPercentage;
-  }).maxBubbleRelativeSize(0.3).x(d3.scaleLinear().domain([-2500, 2500])).y(d3.scaleLinear().domain([-100, 100])).r(d3.scaleLinear().domain([0, 4000])) // ##### Elastic Scaling
+  }).maxBubbleRelativeSize(0.3)
+  .x(d3.scaleLinear().domain([-2500, 2500]))
+  .y(d3.scaleLinear().domain([-100, 100]))
+  .r(d3.scaleLinear()
+  .domain([0, 4000])) 
+  // ##### Elastic Scaling
   // `.elasticY` and `.elasticX` determine whether the chart should rescale each axis to fit the data.
   .elasticY(true).elasticX(true) // `.yAxisPadding` and `.xAxisPadding` add padding to data above and below their max values in the same unit
   // domains as the Accessors.
@@ -192,9 +198,18 @@ d3.csv('https://www.quandl.com/api/v3/datasets/BCHARTS/COINFALCONEUR.csv?api_key
   .renderLabel(true).label(function (p) {
     return p.key;
   }) // (_optional_) whether chart should render titles, `default = false`
-  .renderTitle(true).title(function (p) {
-    return [p.key, 'Index Gain: ' + numberFormat(p.value.absGain), 'Index Gain in Percentage: ' + numberFormat(p.value.percentageGain) + '%', 'Fluctuation / Index Ratio: ' + numberFormat(p.value.fluctuationPercentage) + '%'].join('\n');
-  }) // #### Customize Axes
+  .renderTitle(true)
+  .title(function (p) {
+    return [
+            p.key, 
+            'Index Gain: ' 
+            + numberFormat(p.value.absGain), 'Index Gain in Percentage: ' 
+            + numberFormat(p.value.percentageGain) 
+            + '%', 'Fluctuation / Index Ratio: ' 
+            + numberFormat(p.value.fluctuationPercentage) 
+            + '%'].join('\n');
+  }) 
+  // #### Customize Axes
   // Set a custom tick format. Both `.yAxis()` and `.xAxis()` return an axis object,
   // so any additional method chaining applies to the axis, not the chart.
   .yAxis().tickFormat(function (v) {
@@ -222,6 +237,8 @@ d3.csv('https://www.quandl.com/api/v3/datasets/BCHARTS/COINFALCONEUR.csv?api_key
 
     return label;
   });
+
+
   dayOfWeekChart
   /* dc.rowChart('#day-of-week-chart', 'chartGroup') */
   .width(width).height(height).margins({
@@ -229,13 +246,19 @@ d3.csv('https://www.quandl.com/api/v3/datasets/BCHARTS/COINFALCONEUR.csv?api_key
     left: 10,
     right: 10,
     bottom: 20
-  }).group(dayOfWeekGroup).dimension(dayOfWeek) // Assign colors to each value in the x scale domain
-  .ordinalColors(['#3182bd', '#6baed6', '#9ecae1', '#c6dbef', '#dadaeb']).label(function (d) {
+  })
+  .group(dayOfWeekGroup)
+  .dimension(dayOfWeek) // Assign colors to each value in the x scale domain
+  .ordinalColors(['#3182bd', '#6baed6', '#9ecae1', '#c6dbef', '#dadaeb'])
+  .label(function (d) {
     return d.key.split('.')[1];
   }) // Title sets the row text
   .title(function (d) {
     return d.value;
-  }).elasticX(true).xAxis().ticks(4); // #### Bar Chart
+  })
+  .elasticX(true).xAxis().ticks(4); 
+
+  // #### Bar Chart
   // Create a bar chart and use the given css selector as anchor. You can also specify
   // an optional chart group for this chart to be scoped within. When a chart belongs
   // to a specific group then any interaction with such chart will only trigger redraw
@@ -263,7 +286,8 @@ d3.csv('https://www.quandl.com/api/v3/datasets/BCHARTS/COINFALCONEUR.csv?api_key
         s = '';
     s += numberFormat(filter[0]) + '% -> ' + numberFormat(filter[1]) + '%';
     return s;
-  }); // Customize axes
+  }); 
+  // Customize axes
 
   fluctuationChart.xAxis().tickFormat(function (v) {
     return v + '%';
@@ -280,13 +304,15 @@ d3.csv('https://www.quandl.com/api/v3/datasets/BCHARTS/COINFALCONEUR.csv?api_key
     right: 50,
     bottom: 55,
     left: 52
-  }).dimension(moveMonths)
+  })
+  .dimension(moveMonths)
   .mouseZoomable(true) // Specify a "range chart" to link its brush extent with the zoom of the current "focus chart".
   .rangeChart(volumeChart)
   .x(d3.scaleTime()
   .domain([new Date(minDate), new Date(maxDate)]))
   .round(d3.timeMonth.round)
-  .xUnits(d3.timeMonths).elasticY(true)
+  .xUnits(d3.timeMonths)
+  .elasticY(true)
   .renderHorizontalGridLines(true) // ##### Legend
   // Position the legend relative to the chart origin and specify items' height and separation.
   .legend(dc.legend().x(800).y(10).itemHeight(13).gap(5)).brushOn(false) // Add the base layer of the stack with group. The second parameter specifies a series name for use in the
