@@ -105,9 +105,6 @@ var lineChart= dc.lineChart("#chart")
     .gap(1)
     .renderHorizontalGridLines(true).renderVerticalGridLines(true)
 
-    
-  
-
     barChart.yAxis().ticks(4);
     barChart.xAxis().ticks(2);
 

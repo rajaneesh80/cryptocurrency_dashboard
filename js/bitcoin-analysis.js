@@ -2,22 +2,22 @@ var gainOrLossChart = dc.pieChart('#gain-loss-chart');
 var fluctuationChart = dc.barChart('#fluctuation-chart');
 var quarterChart = dc.pieChart('#quarter-chart');
 var dayOfWeekChart = dc.rowChart('#day-of-week-chart');
-var moveChart = dc.lineChart('#monthly-move-chart');
-var volumeChart = dc.barChart('#monthly-volume-chart');
-var monthlyBubbleChart = dc.bubbleChart('#yearly-bubble-chart');
+var monthlyBubbleChart = dc.bubbleChart('#monthly-bubble-chart');
+
 
 if (!navigator.onLine) {
   alert('This website need to be connected to internet in order to work properly');
 }
 
 // Bitcoinn 30 days 
-var url = "https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&limit=366&aggregate=1&e=CCCAGG";
+var url = "https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&limit=365&aggregate=1&e=CCCAGG";
 
 d3.json(url).get(function(error, d) {
    var data = d.Data;
    for (var i = 0; i < data.length; i++) {
         //console.log(data[i].time);
-    var numberFormat = d3.format('.2f');   
+    var numberFormat = d3.format('.2f'); 
+     var dateFormat = d3.time.format('%m/%d/%Y');  
     }
     data.forEach(function(d){
       var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -40,15 +40,8 @@ var all = ndx.groupAll();
 var dateDimension = ndx.dimension(function(d){return d.time;});
 
 var dateGroup = dateDimension.group().reduceSum(function(d){ return d.close; });
-
-/// High
-
 var dateHighGroup = dateDimension.group().reduceSum(function(d){ return d.high; });
-
-/// Low
-
 var dateLowGroup = dateDimension.group().reduceSum(function(d){ return d.low; });
-//console.log(dateDimension);
 
 // Find first and last date
 var minDate = dateDimension.bottom(1)[0].time;
@@ -73,10 +66,6 @@ var monthlyDimension = ndx.dimension(function (d) {
   return getMonthName;
 });
 
-var minMonth = monthlyDimension .bottom(1)[0].time;
-var maxMonth = monthlyDimension .top(1)[0].time;
-
-
 // Maintain running tallies by month as filters are applied or removed
 var monthlyPerformanceGroup = monthlyDimension.group().reduce(
 /* callback for when data is added to the current filter results */
@@ -88,9 +77,12 @@ function (p, v) {
   p.avgIndex = p.sumIndex / p.count;
   p.percentageGain = p.avgIndex ? p.absGain / p.avgIndex * 100 : 0;
   p.fluctuationPercentage = p.avgIndex ? p.fluctuation / p.avgIndex * 100 : 0;
+  //console.log(p.fluctuationPercentage);
   return p;
 },
+
 /* callback for when data is removed from the current filter results */
+
 function (p, v) {
   --p.count;
   p.absGain -= v.close - v.open;
@@ -101,6 +93,7 @@ function (p, v) {
   p.fluctuationPercentage = p.avgIndex ? p.fluctuation / p.avgIndex * 100 : 0;
   return p;
 },
+
 /* initialize p */
 function () {
   return {
@@ -114,43 +107,8 @@ function () {
   };
 }); 
 
-////
-console.log(monthlyPerformanceGroup);
-// Group by total movement within month
+//console.log(monthlyPerformanceGroup);
 
-var monthlyMoveGroup = monthlyDimension.group().reduceSum(function (d) {
-  return Math.abs(d.close - d.open);
-});
-
-console.log(monthlyMoveGroup);
-
-// Group by total volume within move, and scale down result
-
-var volumeByMonthGroup = monthlyDimension.group().reduceSum(function (d) {
-  return d['volumeto (Currency)'] / 100000000;
-});
-
-var indexAvgByMonthGroup = monthlyDimension.group().reduce(function (p, v) {
-    ++p.days;
-    p.total += (v.open + v.close) / 2;
-    p.avg = Math.round(p.total / p.days);
-    return p;
-  }, 
-
-  function (p, v) {
-    --p.days;
-    p.total -= (v.open + v.close) / 2;
-    p.avg = p.days ? Math.round(p.total / p.days) : 0;
-    return p;
-  }, 
-
-  function () {
-    return {
-      days: 0,
-      total: 0,
-      avg: 0
-    };
-}); 
 
 
 // Create categorical dimension
@@ -174,6 +132,16 @@ var fluctuationGroup = fluctuation.group();
 
 //////////
 
+var monthlyMove = ndx.dimension(function (d) {
+  return Math.round((d.close - d.open) / d.open * 100);
+});
+
+var monthlyMoveGroup = monthlyMove.group()
+
+console.log(monthlyMoveGroup);
+
+/////
+
 // summerize volume by quarter
 var quarter = ndx.dimension(function (d) {
 
@@ -182,17 +150,12 @@ var date = d.time;
 var month = date.split("-");
 //console.log(month);
 var getMonthName = month[2];
-//console.log(getMonthName[1]);
-//console.log(getMonthName);
-//['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
-
 return getMonthName;
 });
 
 console.log(quarter);
 
 var quarterGroup = quarter.group().reduceSum(function (d) {
-  //console.log(d.volumeto);
   return d.volumeto;
 });
 
@@ -225,8 +188,8 @@ var dayOfWeekGroup = dayOfWeek.group();
 // to a specific group then any interaction with such chart will only trigger redraw
 // on other charts within the same chart group.
 
-gainOrLossChart 
-  .width(180) // (optional) define chart width, :default = 200
+gainOrLossChart
+  .width(280) // (optional) define chart width, :default = 200
   .height(180) // (optional) define chart height, :default = 200
   .radius(80) // define pie radius
   .innerRadius(10)
@@ -247,6 +210,8 @@ gainOrLossChart
     return label;
   })
 
+  .legend(dc.legend().x(230).y(5).itemHeight(12).gap(5))
+
   // (optional) whether chart should render labels, :default = true
   .renderLabel(true)
   // (optional) if inner radius is used then a donut chart will be generated instead of pie chart
@@ -261,12 +226,13 @@ gainOrLossChart
   .colorAccessor(function(d, i){return d.value;});
 
   quarterChart
-    .width(180)
-    .height(180)
+    .width(280)
+    .height(190)
     .radius(80)
     .innerRadius(30)
     .dimension(quarter)
-    .group(quarterGroup);
+    .group(quarterGroup)
+    .legend(dc.legend().x(230).y(5).itemHeight(12).gap(5));
 
 
 // table
@@ -296,10 +262,10 @@ gainOrLossChart
     /* dc.bubbleChart('#yearly-bubble-chart', 'chartGroup') */
 
     monthlyBubbleChart
-        .width(990) // (optional) define chart width, :default = 200
+        .width(690) // (optional) define chart width, :default = 200
         .height(250)  // (optional) define chart height, :default = 200
         .transitionDuration(1500) // (optional) define chart transition duration, :default = 750
-        .margins({top: 10, right: 50, bottom: 30, left: 40})
+        .margins({top: 15, right: 50, bottom: 40, left: 50})
         .dimension(monthlyDimension)
 
         //Bubble chart expect the groups are reduced to multiple values which would then be used
@@ -329,7 +295,7 @@ gainOrLossChart
         .radiusValueAccessor(function (p) {
             return p.value.fluctuationPercentage;
         })
-        .maxBubbleRelativeSize(0.3)
+        .maxBubbleRelativeSize(0.7)
         .x(d3.scale.linear().domain([-2500, 2500]))
         .y(d3.scale.linear().domain([-100, 100]))
         .r(d3.scale.linear().domain([0, 4000]))
@@ -345,7 +311,7 @@ gainOrLossChart
         .xAxisPadding(500)
         .renderHorizontalGridLines(true) // (optional) render horizontal grid lines, :default=false
         .renderVerticalGridLines(true) // (optional) render vertical grid lines, :default=false
-        .xAxisLabel('BTC Gain') // (optional) render an axis label below the x axis
+        .xAxisLabel('BTC Gain $') // (optional) render an axis label below the x axis
         .yAxisLabel('BTC Gain %') // (optional) render a vertical axis lable left of the y axis
 
         //#### Labels and  Titles
@@ -356,15 +322,7 @@ gainOrLossChart
         })
         .renderTitle(true) // (optional) whether chart should render titles, :default = false
 
-      /*  .title(function (p) {
-            return [
-                p.key,
-                'Index Gain: ' + numberFormat(p.value.absGain),
-                'Index Gain in Percentage: ' + numberFormat(p.value.percentageGain) + '%',
-                'Fluctuation / Index Ratio: ' + numberFormat(p.value.fluctuationPercentage) + '%'
-            ].join('\n');
-        })*/
-
+ 
          .title(function (p) {
             return [
                 p.key, 
@@ -387,7 +345,7 @@ gainOrLossChart
     //#### Row Chart
 
     dayOfWeekChart
-        .width(180)
+        .width(280)
         .height(180)
         .margins({top: 20, left: 10, right: 10, bottom: 20})
         .dimension(dayOfWeek)
@@ -395,6 +353,7 @@ gainOrLossChart
         
         // assign colors to each value in the x scale domain
         .ordinalColors(['#3182bd', '#6baed6', '#9ecae1', '#c6dbef', '#dadaeb'])
+
         .label(function (d) {
             return d.key.split('.')[1];
         })
@@ -414,8 +373,9 @@ gainOrLossChart
     // to a specific group then any interaction with such chart will only trigger redraw
     // on other charts within the same chart group.
     /* dc.barChart('#volume-month-chart') */
-    fluctuationChart.width(420)
-        .height(180)
+    fluctuationChart
+        .width(690)
+        .height(220)
         .margins({top: 10, right: 50, bottom: 30, left: 40})
         .dimension(fluctuation)
         .group(fluctuationGroup)
@@ -445,67 +405,9 @@ gainOrLossChart
 
         fluctuationChart.yAxis().ticks(5);
 
-/////
+ 
 
-  moveChart
-  .renderArea(true)
-  .width(990)
-  .height(200)
-  .transitionDuration(1000)
-  .margins({top: 30, right: 50, bottom: 25, left: 40})
-  .dimension(monthlyDimension)
-  // Specify a "range chart" to link its brush extent with the zoom of the current "focus chart"
-  .mouseZoomable(true) 
-  .rangeChart(volumeChart)
-  .x(d3.time.scale()
-  .domain([new Date(minDate), new Date(maxDate)]))
-  .round(d3.time.month.round)
-  .xUnits(d3.time.Months)
-  .elasticY(true)
-  .renderHorizontalGridLines(true) 
-  // ##### Legend
-  // Position the legend relative to the chart origin and specify items' height and separation.
-  .legend(dc.legend().x(800).y(10).itemHeight(13).gap(5)).brushOn(false) 
-  // Add the base layer of the stack with group. The second parameter specifies a series name for use in the
-  // legend.
-  // The `.valueAccessor` will be used for the base layer
-  .group(indexAvgByMonthGroup, 'Monthly Index Average')
-  .valueAccessor(function (d) {
-    return d.value.avg;
-  }) 
-  // Stack additional layers with `.stack`. The first paramenter is a new group.
-  // The second parameter is the series name. The third is a value accessor.
-  .stack(monthlyMoveGroup, 'Monthly Index Move', function (d) {
-    return d.value;
-  })
-  //.stack(monthlyMoveGroup)
-  // Title can be called by any stack layer.
-  .title(function (d) {
-    var value = d.value.avg ? d.value.avg : d.value;
-
-    if (isNaN(value)) {
-      value = 0;
-    }
-
-    return dateFormat(d.key) + '\n' + numberFormat(value);
-  });
-
-  volumeChart
-  .width(990)
-  .height(40)
-  .margins({top: 0, right: 50, bottom: 20, left: 40})
-  .dimension(monthlyDimension)
-  .group(volumeByMonthGroup)
-  .centerBar(true)
-  .gap(1)
-  .x(d3.time.scale()
-  .domain([new Date(minDate), new Date(maxDate)]))
-  .round(d3.time.month.round)
-  .alwaysUseRounding(true)
-  //.xUnits(d3.time.Months)
-  .yAxisLabel('Billions $');
-
-
+// #### Rendering
 dc.renderAll();
 
 });
