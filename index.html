@@ -24,6 +24,9 @@
 
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"> </script>
 
+  <!-- print_filter -->
+  <script type="text/javascript" src="js/test_filters.js"></script>
+
  
 
   <!-- Fontawesome core CSS -->
@@ -69,11 +72,6 @@
 
               </li>
 
-              <li class="nav-item active">
-
-                <a class="nav-link waves-effect waves-light" href="index-bitcoin-dc.html"> <i class="fas fa-home icon-nav"></i> DC <span class="sr-only"> (current) </a>
-
-              </li>
 
                <li class="nav-item active">
 
@@ -82,10 +80,10 @@
               </li>
 
                <li class="nav-item active">
-
                 <a class="nav-link waves-effect waves-light" href="news.html"> <i class="fas fa-home icon-nav"></i> News <span class="sr-only"> (current) </a>
-
               </li>
+
+       
 
 
           </ul>
@@ -128,15 +126,24 @@
   <div class="row text-center">
     <div id="btc" class="col-md-4 col-sm-12">
 
-      <h4> <a href="bitcoin-one-year-chart.html" target='' style='color:black;'> Bitcoin </a></h4>
-      <img src="img/btc.png" height="30" width="30" class=""alt="">
+      <h4> <a href="bitcoin-one-year-chart.html" data-toggle="tooltip" title="Yearly Chart" style='color:black;'> Bitcoin </a></h4>
+
+       <a href="bitcoin-analysis.html" data-toggle="tooltip" data-placement="bottom" title="Yearly Analysis"> 
+        <img src="img/btc.png" height="30" width="30" class=""alt="">
+      </a>
+
       <div id="btcTicker"> <span id="btcArrow"></span> 1 BTC = $<span id="btcLast"></span></div>
 
     </div>
 
     <div id="eth" class="col-md-4 col-sm-12">
-      <h4><a href="" target='_blank' style='color:black;'>Ethereum</a></h4>
-      <img src="img/eth.png" height="30" width="30" class=""alt="">
+
+      <h4><a href="bitcoin-analysis.html" target='_blank' style='color:black;'>Ethereum</a></h4>
+
+      <a href="bitcoin-analysis.html"> 
+        <img src="img/eth.png" height="30" width="30" class=""alt="">
+      </a>
+
       <div id="ethTicker"><span id="ethArrow"></span> 1 ETH = $<span id="ethLast"></span></div>
     </div>
 
@@ -308,6 +315,15 @@
       // Get the current year for the copyright
       $('#year').text(new Date().getFullYear());
     </script>
+
+
+    <script>
+      // tool tip
+      $(document).ready(function(){
+      $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
+
 
     <script src="js/main.js"> </script>
 

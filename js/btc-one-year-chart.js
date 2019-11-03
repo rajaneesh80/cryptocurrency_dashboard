@@ -1,4 +1,6 @@
 // Bitcoinn 360 days chart
+
+
 var url = "https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&limit=366&aggregate=3&e=CCCAGG";
 
 
@@ -48,6 +50,7 @@ var g = svg.append("g")
     g.append("g")
         .attr("transform", "translate(0," + height + ")")
         .call(d3.axisBottom(x))
+        
 
     g.append("g")
         .call(d3.axisLeft(y))

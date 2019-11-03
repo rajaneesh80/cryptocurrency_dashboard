@@ -18,5 +18,44 @@ body {
   
 }
 
+
+svg .x.axis text {
+  text-anchor: start !important;
+  -webkit-transform: rotate(40deg);
+  transform: rotate(40deg); }
+
+.axis line,
+.axis path {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges; }
+
+
+
+
+svg {
+  margin-right: auto;
+  margin-left: auto;
+  display: table;
+  float: none !important;
+  left: 50%;
+ /* min-width: 100%;
+  min-height: 5vh;*/
+}
+
+
+.container {
+  z-index: 0;
+  background-color: white;
+  min-height: 5vh;
+ }
+
+ svg.attr({
+    "width": "100%",
+    "height": "100%",
+    "viewBox": "0 0 250 250"
+})
+
+
   
 

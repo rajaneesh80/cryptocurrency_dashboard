@@ -26,6 +26,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/queue-async/1.0.7/queue.min.js"></script>
   <!-- Colorbrewer 1 -->
   <script src="https://d3js.org/colorbrewer.v1.min.js"></script>
+  <!-- print_filter -->
+  <script type="text/javascript" src="js/test_filters.js"></script>
+
+  <script type="text/javascript" src="dc-resizing.js"></script>
   <!-- Bootstrap core CSS -->
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -70,10 +74,7 @@
           <a class="nav-link waves-effect waves-light" href="table.html"> <i class="fas fa-home icon-nav"></i> Table <span class="sr-only"> (current) </a>
         </li>
 
-        <li class="nav-item active">
-          <a class="nav-link waves-effect waves-light" href="index-bitcoin-dc.html"> <i class="fas fa-home icon-nav"></i> DC <span class="sr-only"> (current) </a>
-        </li>
-
+      
         <li class="nav-item active">
           <a class="nav-link waves-effect waves-light" href="bitcoin-analysis.html"> <i class="fas fa-home icon-nav"></i> BTC <span class="sr-only"> (current) </a>
         </li>
@@ -92,63 +93,54 @@
 
   <!-- Bootstrap grid setup -->
 <div class="container">
-  <div class="row">
+  <div class="row text-center">
     <div class="col-md-12">
-      <h4 class="text-center">BTC Yearly Analysis Till Today!
+      <h4 class="">BTC Yearly Analysis Till Today!
       <a href="javascript:dc.filterAll(); dc.renderAll();">   Reset All  </a>
       </h4>
     </div>
   </div> <!-- left-charts row 2-->
 </div> <!-- container -->
 
-<div class="container">
-  <div class="row">
-    <div id="left-charts" class="col-sm-12 col-md-8">
-      <div class="row">
 
-        <div class="col-md-12">
-          
-        </div>
 
-      </div> <!-- left-charts row 1-->
-
-  <div class="row">
-    <div class="col-md-12">
+<div id="container" class="container"  style="display:none">
+  <div class="row text-center">
+    <div id="left-charts" class="col-sm-12 col-md-7">
       
-    </div>
-  </div> <!-- left-charts row 2-->
-
-    <div id="monthly-bubble-chart">
+      <div id="monthly-bubble-chart">
       <strong>Yearly Performance</strong> (radius: fluctuation/index ratio, color: gain/loss)
-      <a class="reset" href="javascript:monthlyBubbleChart.filterAll();dc.redrawAll();"style="display: none;"> <strong> Reset </strong> </a> 
+        <a class="reset" href="javascript:monthlyBubbleChart.filterAll();dc.redrawAll();"style="display: none;"> <strong> Reset </strong> </a> 
     </div>
 
-    <div id="fluctuation-chart">
-    <strong> Days by Fluctuation(%) </strong>
-    <a class="reset" href="javascript:fluctuationChart.filterAll();dc.redrawAll();"style="display: none;"> <strong> Reset </strong> </a>  
-    </div>
-
+  <div class="col-sm-6 col-md-12" id="day-of-week-chart">
+    <strong> Days of Weeks </strong>
+      <a class="reset" href="javascript:dayOfWeekChart.filterAll();dc.redrawAll();"style="display: none;"> <strong> Reset </strong> </a>
+  </div>
+    
   </div> <!-- left-charts row-->
-    <div id="right-charts" class="col-md-4 col-sm-12">
+    <div id="right-charts" class="col-md-5 col-sm-12">
       <div class="row">
+
+        <div class="col-sm-6 col-md-12" id="monthly-chart">
+          <strong> Monthaly Volume </strong>
+            <a class="reset" href="javascript:monthlyChart.filterAll();dc.redrawAll();"style="display: none;"> <strong> Reset </strong> </a>
+        </div>
 
         <div class="col-sm-6 col-md-12" id="gain-loss-chart">
           <strong> Gain and Loss % </strong>
             <a class="reset" href="javascript:gainOrLossChart.filterAll();dc.redrawAll();"style="display: none;"> <strong> Reset </strong> </a>
+          </div>
+
+        <div id="fluctuation-chart">
+          <strong> Days by Fluctuation(%) </strong>
+            <a class="reset" href="javascript:fluctuationChart.filterAll();dc.redrawAll();"style="display: none;"> <strong> Reset </strong> </a>
         </div>
 
-        <div class="col-sm-6 col-md-12" id="quarter-chart">
-          <strong> Monthaly Volume </strong>
-            <a class="reset" href="javascript:quarterChart.filterAll();dc.redrawAll();"style="display: none;"> <strong> Reset </strong> </a>
-        </div>
-
-        <div class="col-sm-6 col-md-12" id="day-of-week-chart">
-          <strong> Days of Weeks </strong>
-            <a class="reset" href="javascript:dayOfWeekChart.filterAll();dc.redrawAll();"style="display: none;"> <strong> Reset </strong> </a>
-        </div>
-        
       </div> <!-- left-charts row-->
+      
     </div> <!-- left-charts-->
+
   </div> <!-- main  row-->
 </div> <!-- main  cointainer -->
 

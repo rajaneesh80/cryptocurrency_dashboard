@@ -1,9 +1,11 @@
 var gainOrLossChart = dc.pieChart('#gain-loss-chart');
 var fluctuationChart = dc.barChart('#fluctuation-chart');
-var quarterChart = dc.pieChart('#quarter-chart');
+var monthlyChart = dc.pieChart('#monthly-chart');
 var dayOfWeekChart = dc.rowChart('#day-of-week-chart');
 var monthlyBubbleChart = dc.bubbleChart('#monthly-bubble-chart');
 
+
+//https://stackoverflow.com/questions/847185/convert-a-unix-timestamp-to-time-in-javascript
 
 if (!navigator.onLine) {
   alert('This website need to be connected to internet in order to work properly');
@@ -11,6 +13,9 @@ if (!navigator.onLine) {
 
 // Bitcoinn 30 days 
 var url = "https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&limit=365&aggregate=1&e=CCCAGG";
+
+document.getElementById('container').style.display = 'block';
+
 
 d3.json(url).get(function(error, d) {
    var data = d.Data;
@@ -23,8 +28,9 @@ d3.json(url).get(function(error, d) {
       var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
       var dayname = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
       d.time = new Date(d.time*1000);
+      //console.log(d.time)
       d.time = dayname[d.time.getDay()]+'-'+d.time.getDate()+'-'+months[d.time.getMonth()]+'-'+d.time.getFullYear();
-    
+      //console.log(d.time)
   });
     if (error) throw error;
     //console.log(data)
@@ -33,21 +39,21 @@ d3.json(url).get(function(error, d) {
 
 var ndx = crossfilter(data);
 var all = ndx.groupAll();
-//console.log(ndx);
+
+//print_filter(ndx);
+//print_filter(all);
 
 // dimension by full date
 
 var dateDimension = ndx.dimension(function(d){return d.time;});
+//print_filter(dateDimension);
 
-var dateGroup = dateDimension.group().reduceSum(function(d){ return d.close; });
-var dateHighGroup = dateDimension.group().reduceSum(function(d){ return d.high; });
-var dateLowGroup = dateDimension.group().reduceSum(function(d){ return d.low; });
 
 // Find first and last date
 var minDate = dateDimension.bottom(1)[0].time;
 var maxDate = dateDimension.top(1)[0].time;
 
-////////
+
 
 // Dimension by month
 //https://stackoverflow.com/questions/47575119/how-to-get-month-name-from-an-html-date-input-value
@@ -65,6 +71,8 @@ var monthlyDimension = ndx.dimension(function (d) {
     
   return getMonthName;
 });
+
+//print_filter(monthlyDimension);
 
 // Maintain running tallies by month as filters are applied or removed
 var monthlyPerformanceGroup = monthlyDimension.group().reduce(
@@ -109,7 +117,7 @@ function () {
 
 //console.log(monthlyPerformanceGroup);
 
-
+//print_filter(monthlyPerformanceGroup);
 
 // Create categorical dimension
 
@@ -136,13 +144,12 @@ var monthlyMove = ndx.dimension(function (d) {
   return Math.round((d.close - d.open) / d.open * 100);
 });
 
-var monthlyMoveGroup = monthlyMove.group()
+ var monthlyMoveGroup = monthlyDimension.group().reduceSum(function (d) {
+    return Math.abs(d.close - d.open);
+  }); 
+//console.log(monthlyMoveGroup);
 
-console.log(monthlyMoveGroup);
-
-/////
-
-// summerize volume by quarter
+// summerize volume by Month
 var quarter = ndx.dimension(function (d) {
 
 var date = d.time;
@@ -153,13 +160,13 @@ var getMonthName = month[2];
 return getMonthName;
 });
 
-console.log(quarter);
+//console.log(quarter);
 
 var quarterGroup = quarter.group().reduceSum(function (d) {
   return d.volumeto;
 });
 
-console.log(quarterGroup);
+//console.log(quarterGroup);
 
 // Counts per weekday
 
@@ -179,9 +186,6 @@ var dayOfWeek = ndx.dimension(function (d) {
 
 var dayOfWeekGroup = dayOfWeek.group();
  
-/////////
-
-
 // #### Pie/Donut Chart
 // Create a pie chart and use the given css selector as anchor. You can also specify
 // an optional chart group for this chart to be scoped within. When a chart belongs
@@ -189,7 +193,7 @@ var dayOfWeekGroup = dayOfWeek.group();
 // on other charts within the same chart group.
 
 gainOrLossChart
-  .width(280) // (optional) define chart width, :default = 200
+  .width(240) // (optional) define chart width, :default = 200
   .height(180) // (optional) define chart height, :default = 200
   .radius(80) // define pie radius
   .innerRadius(10)
@@ -210,7 +214,8 @@ gainOrLossChart
     return label;
   })
 
-  .legend(dc.legend().x(230).y(5).itemHeight(12).gap(5))
+  .legend(dc.legend().x(180).y(5).itemHeight(12).gap(3))
+
 
   // (optional) whether chart should render labels, :default = true
   .renderLabel(true)
@@ -225,19 +230,20 @@ gainOrLossChart
   // (optional) define color value accessor
   .colorAccessor(function(d, i){return d.value;});
 
-  quarterChart
-    .width(280)
+  monthlyChart
+    .width(240)
     .height(190)
     .radius(80)
     .innerRadius(30)
     .dimension(quarter)
     .group(quarterGroup)
-    .legend(dc.legend().x(230).y(5).itemHeight(12).gap(5));
+    .legend(dc.legend().x(199).y(5).itemHeight(10).gap(3))
+    //.legend(dc.legend().x(230).y(5).itemHeight(12).gap(5));
 
 
 // table
     var dataTable = dc.dataTable("#table1")
-      .width(1160)
+      .width(410)
       .height(300)
       .dimension(dateDimension)
       .showGroups(false)
@@ -262,11 +268,12 @@ gainOrLossChart
     /* dc.bubbleChart('#yearly-bubble-chart', 'chartGroup') */
 
     monthlyBubbleChart
-        .width(690) // (optional) define chart width, :default = 200
-        .height(250)  // (optional) define chart height, :default = 200
+        .width(640) // (optional) define chart width, :default = 200
+        .height(300)  // (optional) define chart height, :default = 200
         .transitionDuration(1500) // (optional) define chart transition duration, :default = 750
-        .margins({top: 15, right: 50, bottom: 40, left: 50})
+        .margins({top: 15, right: 10, bottom: 65, left: 50})
         .dimension(monthlyDimension)
+
 
         //Bubble chart expect the groups are reduced to multiple values which would then be used
         //to generate x, y, and radius for each key (bubble) in the group
@@ -295,7 +302,7 @@ gainOrLossChart
         .radiusValueAccessor(function (p) {
             return p.value.fluctuationPercentage;
         })
-        .maxBubbleRelativeSize(0.7)
+        .maxBubbleRelativeSize(0.5)
         .x(d3.scale.linear().domain([-2500, 2500]))
         .y(d3.scale.linear().domain([-100, 100]))
         .r(d3.scale.linear().domain([0, 4000]))
@@ -313,6 +320,7 @@ gainOrLossChart
         .renderVerticalGridLines(true) // (optional) render vertical grid lines, :default=false
         .xAxisLabel('BTC Gain $') // (optional) render an axis label below the x axis
         .yAxisLabel('BTC Gain %') // (optional) render a vertical axis lable left of the y axis
+        
 
         //#### Labels and  Titles
         //Labels are displaed on the chart for each bubble. Titles displayed on mouseover.
@@ -339,14 +347,16 @@ gainOrLossChart
         //to the axis, not the chart.
         .yAxis().tickFormat(function (v) {
             return v + '%';
-        });
+        })
+
+       /* apply_resizing(fluctuationChart);*/
 ///
 
     //#### Row Chart
 
     dayOfWeekChart
-        .width(280)
-        .height(180)
+        .width(640)
+        .height(280)
         .margins({top: 20, left: 10, right: 10, bottom: 20})
         .dimension(dayOfWeek)
         .group(dayOfWeekGroup)
@@ -373,10 +383,11 @@ gainOrLossChart
     // to a specific group then any interaction with such chart will only trigger redraw
     // on other charts within the same chart group.
     /* dc.barChart('#volume-month-chart') */
+
     fluctuationChart
-        .width(690)
+        .width(240)
         .height(220)
-        .margins({top: 10, right: 50, bottom: 30, left: 40})
+        .margins({top: 10, right: 5, bottom: 50, left: 30})
         .dimension(fluctuation)
         .group(fluctuationGroup)
         .elasticY(true)
@@ -403,11 +414,14 @@ gainOrLossChart
           return v + '%'; 
         });
 
-        fluctuationChart.yAxis().ticks(5);
+        fluctuationChart.yAxis().ticks(5)
 
- 
+        /*apply_resizing(fluctuationChart);*/
+
 
 // #### Rendering
 dc.renderAll();
 
+
 });
+
