@@ -258,3 +258,7 @@ function getNews() {
   }
 
   // TimeConverte Summary Table End
+
+  // tool tip
+
+

@@ -243,8 +243,8 @@ gainOrLossChart
 
 // table
     var dataTable = dc.dataTable("#table1")
-      .width(410)
-      .height(300)
+      //.width(410)
+      //.height(300)
       .dimension(dateDimension)
       .showGroups(false)
       // .size(5)
@@ -268,10 +268,10 @@ gainOrLossChart
     /* dc.bubbleChart('#yearly-bubble-chart', 'chartGroup') */
 
     monthlyBubbleChart
-        .width(640) // (optional) define chart width, :default = 200
-        .height(300)  // (optional) define chart height, :default = 200
+        //.width(640) // (optional) define chart width, :default = 200
+        //.height(300)  // (optional) define chart height, :default = 200
         .transitionDuration(1500) // (optional) define chart transition duration, :default = 750
-        .margins({top: 15, right: 10, bottom: 65, left: 50})
+        .margins({top: 25, right: 5, bottom: 45, left: 50})
         .dimension(monthlyDimension)
 
 
@@ -355,11 +355,12 @@ gainOrLossChart
     //#### Row Chart
 
     dayOfWeekChart
-        .width(640)
-        .height(280)
-        .margins({top: 20, left: 10, right: 10, bottom: 20})
+        //.width(640)
+        //.height(280)
+        .margins({top: 10, left: 5, right: 5, bottom: 30})
         .dimension(dayOfWeek)
         .group(dayOfWeekGroup)
+
         
         // assign colors to each value in the x scale domain
         .ordinalColors(['#3182bd', '#6baed6', '#9ecae1', '#c6dbef', '#dadaeb'])
@@ -385,8 +386,8 @@ gainOrLossChart
     /* dc.barChart('#volume-month-chart') */
 
     fluctuationChart
-        .width(240)
-        .height(220)
+        //.width(240)
+        //.height(220)
         .margins({top: 10, right: 5, bottom: 50, left: 30})
         .dimension(fluctuation)
         .group(fluctuationGroup)
