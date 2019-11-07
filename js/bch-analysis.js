@@ -326,8 +326,8 @@ gainOrLossChart
         .xAxisPadding(500)
         .renderHorizontalGridLines(true) // (optional) render horizontal grid lines, :default=false
         .renderVerticalGridLines(true) // (optional) render vertical grid lines, :default=false
-        .xAxisLabel('BTC Gain $') // (optional) render an axis label below the x axis
-        .yAxisLabel('BTC Gain %') // (optional) render a vertical axis lable left of the y axis
+        .xAxisLabel('BCH Gain $') // (optional) render an axis label below the x axis
+        .yAxisLabel('BCH Gain %') // (optional) render a vertical axis lable left of the y axis
         
 
         //#### Labels and  Titles

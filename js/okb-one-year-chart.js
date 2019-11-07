@@ -1,7 +1,7 @@
-// ETH 360 days chart
+// Bitcoinn 360 days chart
 
 
-var url = "https://min-api.cryptocompare.com/data/histoday?fsym=ETH&tsym=USD&limit=365&aggregate=1&e=CCCAGG";
+var url = "https://min-api.cryptocompare.com/data/histoday?fsym=ETH&tsym=USD&limit=366&aggregate=3&e=CCCAGG";
 
 
   d3.json(url).get(function(error, d) {

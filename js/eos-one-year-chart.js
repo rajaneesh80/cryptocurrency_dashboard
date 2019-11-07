@@ -1,7 +1,7 @@
-// ETH 360 days chart
+// EOS 360 days chart
 
 
-var url = "https://min-api.cryptocompare.com/data/histoday?fsym=ETH&tsym=USD&limit=365&aggregate=1&e=CCCAGG";
+var url = "https://min-api.cryptocompare.com/data/histoday?fsym=EOS&tsym=USD&limit=365&aggregate=1&e=CCCAGG";
 
 
   d3.json(url).get(function(error, d) {
@@ -104,8 +104,8 @@ var g = svg.append("g")
 
 var xmlhttp = new XMLHttpRequest();
 
-  var url = "https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH,EOS,BCH,LTC,XRP&tsyms=USD";
-  var urlHistoricalBtc = "https://min-api.cryptocompare.com/data/histominute?fsym=ETH&tsym=USD&limit=1";
+  var url = "https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,eos,EOS,BCH,LTC,XRP&tsyms=USD";
+  var urlHistoricalBtc = "https://min-api.cryptocompare.com/data/histominute?fsym=EOS&tsym=USD&limit=1";
   
       xmlhttp.onreadystatechange = function() {
           if (this.readyState == 4  &&  this.status == 200) {
@@ -119,12 +119,12 @@ var xmlhttp = new XMLHttpRequest();
 
 function parseJsonFromCryptoCompare(json) {
   var time = "<i>Last Updated : " + Date() + "</i>";
-  var ethereum = json["ETH"]["USD"];
+  var eosereum = json["EOS"]["USD"];
 
-  document.getElementById("ethLast").innerHTML = ethereum;
+  document.getElementById("eosLast").innerHTML = eosereum;
   document.getElementById("lastUpdated").innerHTML = time;
                 
-  colorText("ethLast",urlHistoricalBtc);
+  colorText("eosLast",urlHistoricalBtc);
 
 }
               
@@ -143,15 +143,15 @@ function colorText(elementId, url) {
 
     function updateColors(json, elementId) {
 
-      if (elementId == "ethLast") {
+      if (elementId == "eosLast") {
         var oldVal = json["Data"][0]["close"];
-        if (Number(oldVal) < Number(document.getElementById("ethLast").innerHTML)) {
-          $("#ethTicker").css("color", "green");
-          document.getElementById("ethArrow").innerHTML = "<img src='img/arrow-g.png' style='max-width:12px;'>";
+        if (Number(oldVal) < Number(document.getElementById("eosLast").innerHTML)) {
+          $("#eosTicker").css("color", "green");
+          document.getElementById("eosArrow").innerHTML = "<img src='img/arrow-g.png' style='max-width:12px;'>";
         }
         else {
-          $("#ethTicker").css("color", "red");
-          document.getElementById("ethArrow").innerHTML = "<img src='img/arrow-r.png' style='max-width:12px;'>";
+          $("#eosTicker").css("color", "red");
+          document.getElementById("eosArrow").innerHTML = "<img src='img/arrow-r.png' style='max-width:12px;'>";
         }
       }
 
@@ -168,7 +168,7 @@ function timeConverter(UNIX_timestamp){
   var year = a.getFullYear();
   var month = months[a.getMonth()];
   var date = a.getDate();
-  var hour = a.getHours();
+  var hour = a.geosours();
   var min = a.getMinutes() < 10 ? '0' + a.getMinutes() : a.getMinutes();
   var sec = a.getSeconds() < 10 ? '0' + a.getSeconds() : a.getSeconds();
   var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
@@ -176,30 +176,30 @@ function timeConverter(UNIX_timestamp){
 }
 
 (function getData() {
-  var url = "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=ETH&tsyms=USD";
+  var url = "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=EOS&tsyms=USD";
   url = encodeURI(url);
   console.log(url);
 
   $.getJSON(url,function(data) {
 
-      var heth_crypto_data = '';
-      var leth_crypto_data = '';
-      var pceth_crypto_data = '';
-      var mceth_crypto_data = '';
+      var heos_crypto_data = '';
+      var leos_crypto_data = '';
+      var pceos_crypto_data = '';
+      var mceos_crypto_data = '';
 
       $.each(data.RAW, function(key, value){
 
-        leth_crypto_data += value.USD.LOWDAY;
-        heth_crypto_data += value.USD.HIGHDAY;
-        pceth_crypto_data += value.USD.CHANGEPCT24HOUR;
-        mceth_crypto_data += value.USD.MKTCAP;
+        leos_crypto_data += value.USD.LOWDAY;
+        heos_crypto_data += value.USD.HIGHDAY;
+        pceos_crypto_data += value.USD.CHANGEPCT24HOUR;
+        mceos_crypto_data += value.USD.MKTCAP;
 
       });
 
-      $('#ethHigh').html(heth_crypto_data);
-      $('#ethLow').html(leth_crypto_data);
-      $('#ethPct').html(pceth_crypto_data);
-      $('#ethMkc').html(mceth_crypto_data);
+      $('#eosHigh').html(heos_crypto_data);
+      $('#eosLow').html(leos_crypto_data);
+      $('#eosPct').html(pceos_crypto_data);
+      $('#eosMkc').html(mceos_crypto_data);
 
     })
 
