@@ -11,8 +11,8 @@ if (!navigator.onLine) {
   alert('This website need to be connected to internet in order to work properly');
 }
 
-// Bitcoinn 30 days 
-var url = "https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&limit=365&aggregate=1&e=CCCAGG";
+// ETH 365 days 
+var url = "https://min-api.cryptocompare.com/data/histoday?fsym=XRP&tsym=USD&limit=365&aggregate=1&e=CCCAGG";
 
 document.getElementById('container').style.display = 'block';
 
@@ -259,6 +259,14 @@ gainOrLossChart
       .sortBy(function(d){ return d.time; })
       .order(d3.descending);
 
+/*   cities.sort(function(a, b){
+    return a["index"]-b["index"];
+});*/
+
+/*    .sortBy(function(x, y){
+   return d3.ascending(x.close, y.close);
+})
+*/
 ///
     //#### Bubble Chart
     //Create a bubble chart and use the given css selector as anchor. You can also specify
@@ -318,8 +326,8 @@ gainOrLossChart
         .xAxisPadding(500)
         .renderHorizontalGridLines(true) // (optional) render horizontal grid lines, :default=false
         .renderVerticalGridLines(true) // (optional) render vertical grid lines, :default=false
-        .xAxisLabel('BTC Gain $') // (optional) render an axis label below the x axis
-        .yAxisLabel('BTC Gain %') // (optional) render a vertical axis lable left of the y axis
+        .xAxisLabel('XRP Gain $') // (optional) render an axis label below the x axis
+        .yAxisLabel('XRP Gain %') // (optional) render a vertical axis lable left of the y axis
         
 
         //#### Labels and  Titles

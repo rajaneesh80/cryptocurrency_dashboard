@@ -11,8 +11,8 @@ if (!navigator.onLine) {
   alert('This website need to be connected to internet in order to work properly');
 }
 
-// Bitcoinn 30 days 
-var url = "https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&limit=365&aggregate=1&e=CCCAGG";
+// ETH 365 days 
+var url = "https://min-api.cryptocompare.com/data/histoday?fsym=BCH&tsym=USD&limit=365&aggregate=1&e=CCCAGG";
 
 document.getElementById('container').style.display = 'block';
 
@@ -259,6 +259,14 @@ gainOrLossChart
       .sortBy(function(d){ return d.time; })
       .order(d3.descending);
 
+/*   cities.sort(function(a, b){
+    return a["index"]-b["index"];
+});*/
+
+/*    .sortBy(function(x, y){
+   return d3.ascending(x.close, y.close);
+})
+*/
 ///
     //#### Bubble Chart
     //Create a bubble chart and use the given css selector as anchor. You can also specify
