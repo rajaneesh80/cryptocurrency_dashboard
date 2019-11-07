@@ -9,13 +9,9 @@
 
       $.each(data.RAW, function(key, value){
 
-        var time_1 = value.USD.LASTUPDATE ;
-        console.log(value.USD.LASTUPDATE)
-        time_1 = timeConverter(time_1);
+      
 
-        var time_2 = value.USD.LASTUPDATE ;
-        time_2 = timeConverter_1(time_2);
-        console.log(time_2 );
+    
 
         // https://stackoverflow.com/questions/9461621/format-a-number-as-2-5k-if-a-thousand-or-more-otherwise-900
         
@@ -78,18 +74,8 @@
 
       var time = date + ' ' + month + ' ' + year ;
     return time;
-  }
+  };
 
-    function timeConverter_1(UNIX_timestamp){
-      var a = new Date(UNIX_timestamp * 1000);
-      var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-      var year = a.getFullYear();
-      var month = months[a.getMonth()];
-      var date = a.getDate();
-
-      var time = year + '-' + month + '-' + date ;
-    return time;
-  }
 
 
 /**

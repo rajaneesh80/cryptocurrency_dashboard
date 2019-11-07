@@ -1,12 +1,20 @@
 var xmlhttp = new XMLHttpRequest();
 
-  var url = "https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH,EOS,BCH,LTC,XRP&tsyms=USD";
+  var url = "https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH,EOS,BCH,LTC,XRP,LINK,BNB,TRX,ETC,OKB,XMR&tsyms=USD";
+
   var urlHistoricalBtc = "https://min-api.cryptocompare.com/data/histominute?fsym=BTC&tsym=USD&limit=1";
   var urlHistoricalEth = "https://min-api.cryptocompare.com/data/histominute?fsym=ETH&tsym=USD&limit=1";
   var urlHistoricalBch = "https://min-api.cryptocompare.com/data/histominute?fsym=BCH&tsym=USD&limit=1";
   var urlHistoricalEos = "https://min-api.cryptocompare.com/data/histominute?fsym=EOS&tsym=USD&limit=1";
   var urlHistoricalLtc = "https://min-api.cryptocompare.com/data/histominute?fsym=LTC&tsym=USD&&limit=1";
   var urlHistoricalXrp = "https://min-api.cryptocompare.com/data/histominute?fsym=XRP&tsym=USD&&limit=1";
+
+  var urlHistoricalLink = "https://min-api.cryptocompare.com/data/histominute?fsym=LINK&tsym=USD&limit=1";
+  var urlHistoricalBnb = "https://min-api.cryptocompare.com/data/histominute?fsym=BNB&tsym=USD&limit=1";
+  var urlHistoricalTrx = "https://min-api.cryptocompare.com/data/histominute?fsym=TRX&tsym=USD&limit=1";
+  var urlHistoricalEtc = "https://min-api.cryptocompare.com/data/histominute?fsym=ETC&tsym=USD&limit=1";
+  var urlHistoricalOkb = "https://min-api.cryptocompare.com/data/histominute?fsym=OKB&tsym=USD&&limit=1";
+  var urlHistoricalXmr = "https://min-api.cryptocompare.com/data/histominute?fsym=XMR&tsym=USD&&limit=1";
 
       xmlhttp.onreadystatechange = function() {
           if (this.readyState == 4  &&  this.status == 200) {
@@ -20,6 +28,7 @@ var xmlhttp = new XMLHttpRequest();
 
 function parseJsonFromCryptoCompare(json) {
   var time = "<i>Last Updated : " + Date() + "</i>";
+
   var bitcoin = json["BTC"]["USD"];
   var ether = json["ETH"]["USD"];
   var bitcoinCash = json["BCH"]["USD"];
@@ -27,12 +36,28 @@ function parseJsonFromCryptoCompare(json) {
   var litecoin = json["LTC"]["USD"];
   var XRP = json["XRP"]["USD"];
 
+  var chainLink = json["LINK"]["USD"];
+  var binanceCoin = json["BNB"]["USD"];
+  var tron = json["TRX"]["USD"];
+  var etherClassic = json["ETC"]["USD"];
+  var okex = json["OKB"]["USD"];
+  var monero = json["XMR"]["USD"];
+
+
   document.getElementById("btcLast").innerHTML = bitcoin;
   document.getElementById("ethLast").innerHTML = ether;
   document.getElementById("bchLast").innerHTML = bitcoinCash;
   document.getElementById("eosLast").innerHTML = EOS;
   document.getElementById("ltcLast").innerHTML = litecoin;
   document.getElementById("xrpLast").innerHTML = XRP;
+
+  document.getElementById("linkLast").innerHTML = chainLink;
+  document.getElementById("bnbLast").innerHTML = binanceCoin;
+  document.getElementById("trxLast").innerHTML = tron;
+  document.getElementById("etcLast").innerHTML = etherClassic;
+  document.getElementById("okbLast").innerHTML = okex;
+  document.getElementById("xmrLast").innerHTML = monero;
+
   document.getElementById("lastUpdated").innerHTML = time;
                 
   colorText("btcLast",urlHistoricalBtc);
@@ -41,9 +66,15 @@ function parseJsonFromCryptoCompare(json) {
   colorText("eosLast",urlHistoricalEth);
   colorText("ltcLast",urlHistoricalEth);
   colorText("xrpLast",urlHistoricalXrp);
+
+  colorText("linkLast",urlHistoricalLink);
+  colorText("bnbLast",urlHistoricalBnb);
+  colorText("trxLast",urlHistoricalTrx);
+  colorText("etcLast",urlHistoricalEtc);
+  colorText("okbLast",urlHistoricalOkb);
+  colorText("xmrLast",urlHistoricalXmr);
 }
               
-
 function colorText(elementId, url) {
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = function() {
@@ -129,6 +160,76 @@ function colorText(elementId, url) {
                     }
                   }
 
+    else if (elementId == "linkLast") {
+      var oldVal = json["Data"][0]["close"];
+      if (Number(oldVal) < Number(document.getElementById("xrpLast").innerHTML)) {
+        $("#linkTicker").css("color", "green");
+        document.getElementById("linkArrow").innerHTML = "<img src='img/arrow-g.png' style='max-width:12px;'>";
+      }
+        else {
+          $("#linkTicker").css("color", "red");
+          document.getElementById("linkArrow").innerHTML = "<img src='img/arrow-r.png' style='max-width:12px;'>";
+          }
+        }
+
+    else if (elementId == "bnbLast") {
+      var oldVal = json["Data"][0]["close"];
+      if (Number(oldVal) < Number(document.getElementById("bnbLast").innerHTML)) {
+        $("#bnbTicker").css("color", "green");
+        document.getElementById("bnbArrow").innerHTML = "<img src='img/arrow-g.png' style='max-width:12px;'>";
+      }
+        else {
+          $("#bnbTicker").css("color", "red");
+          document.getElementById("bnbArrow").innerHTML = "<img src='img/arrow-r.png' style='max-width:12px;'>";
+        }
+      }
+
+      else if (elementId == "trxLast") {
+        var oldVal = json["Data"][0]["close"];
+        if (Number(oldVal) < Number(document.getElementById("trxLast").innerHTML)) {
+          $("#trxTicker").css("color", "green");
+          document.getElementById("trxArrow").innerHTML = "<img src='img/arrow-g.png' style='max-width:12px;'>";
+        }
+        else {
+          $("#trxTicker").css("color", "red");
+          document.getElementById("trxArrow").innerHTML = "<img src='img/arrow-r.png' style='max-width:12px;'>";
+        }
+      }
+      else if (elementId == "etcLast") {
+        var oldVal = json["Data"][0]["close"];
+        if (Number(oldVal) < Number(document.getElementById("etcLast").innerHTML)) {
+          $("#etcTicker").css("color", "green");
+          document.getElementById("etcArrow").innerHTML = "<img src='img/arrow-g.png' style='max-width:12px;'>";
+        }
+        else {
+          $("#etcTicker").css("color", "red");
+          document.getElementById("etcArrow").innerHTML = "<img src='img/arrow-r.png' style='max-width:12px;'>";
+        }
+      }
+
+      else if (elementId == "okbLast") {
+        var oldVal = json["Data"][0]["close"];
+        if (Number(oldVal) < Number(document.getElementById("okbLast").innerHTML)) {
+          $("#okbTicker").css("color", "green");
+          document.getElementById("okbArrow").innerHTML = "<img src='img/arrow-g.png' style='max-width:12px;'>";
+        }
+        else {
+          $("#okbTicker").css("color", "red");
+          document.getElementById("okbArrow").innerHTML = "<img src='img/arrow-r.png' style='max-width:12px;'>";
+        }
+      }
+      else if (elementId == "xmrLast") {
+        var oldVal = json["Data"][0]["close"];
+        if (Number(oldVal) < Number(document.getElementById("xmrLast").innerHTML)) {
+          $("#xmrTicker").css("color", "green");
+          document.getElementById("xmrArrow").innerHTML = "<img src='img/arrow-g.png' style='max-width:12px;'>";
+        }
+        else {
+          $("#xmrTicker").css("color", "red");
+          document.getElementById("xmrArrow").innerHTML = "<img src='img/arrow-r.png' style='max-width:12px;'>";
+        }
+      }
+
   else {
   alert("ERROR: " + elementId);
   }
@@ -193,25 +294,41 @@ function getNews() {
 
       $.each(data.RAW, function(key, value){
 
-        var time_1 = value.USD.LASTUPDATE ;
-        time_1 = yearTimeConverter(time_1);
+     
 
-        var time_2 = value.USD.LASTUPDATE ;
-        time_2 = timeConverter_1(time_2);
-        console.log(time_2);
+        // https://stackoverflow.com/questions/9461621/format-a-number-as-2-5k-if-a-thousand-or-more-otherwise-900
+        
+        var twodigit = value.USD.MKTCAP;
+        twodigit     = shortenLargeNumber(twodigit);
+
+        var twodigitper = value.USD.CHANGEPCT24HOUR;
+        twodigitper     = shortenLargeNumber(twodigitper);
+
+        var twodigitsup = value.USD.SUPPLY;
+        twodigitsup     = shortenLargeNumber(twodigitsup);
+
+        /*
+        var twodigitcurvalue = value.USD.PRICE;
+        twodigitcurvalue     = shortenLargeNumber(twodigitcurvalue);
+        */
+        var twodigitcurhigh = value.USD.HIGHDAY;
+        twodigitcurhigh     = shortenLargeNumber(twodigitcurhigh);
+
+        var twodigitcurlow = value.USD.LOWDAY;
+        twodigitcurlow     = shortenLargeNumber(twodigitcurlow);
 
           crypto_data += '<tr>';
 
           crypto_data += '<td class="text-center">'+key+'</td>';
           crypto_data += '<td class="text-center">'+ '<img src="https://www.cryptocompare.com' + '/'+value.USD.IMAGEURL+'?width=50'+'">'+' </td>';
           crypto_data += '<td class="text-center">'+ '$' + ' ' + value.USD.PRICE+'</td>';
-          crypto_data += '<td class="text-center">'+ '$' + ' ' +value.USD.HIGHDAY+'</td>';
-          crypto_data += '<td class="text-center">'+ '$' + ' ' +value.USD.LOWDAY+'</td>';
-          crypto_data += '<td class="text-center">'+ '$' + ' ' + value.USD.MKTCAP+'</td>';
-          crypto_data += '<td class="text-center">'+ value.USD.CHANGEPCT24HOUR +' ' + '%'+'</td>';
-          crypto_data += '<td class="text-center">'+ '$' + ' ' +value.USD.SUPPLY+'</td>';
+          crypto_data += '<td class="text-center">'+ '$' + ' ' +twodigitcurhigh+'</td>';
+          crypto_data += '<td class="text-center">'+ '$' + ' ' +twodigitcurlow+'</td>';
+          crypto_data += '<td class="text-center">'+ '$' + ' ' + twodigit+'</td>';
+          crypto_data += '<td class="text-center">'+ twodigitper +' ' + '%'+'</td>';
+          crypto_data += '<td class="text-center">'+ '$' + ' ' +twodigitsup+'</td>';
           
-          crypto_data += '<td class="text-center">'+ '<img src="https://images.cryptocompare.com/sparkchart/'+key+'/USD/latest.png?ts=time_2">'+' </td>';
+          crypto_data += '<td class="text-center">'+ '<img src="https://images.cryptocompare.com/sparkchart/'+key+'/USD/latest.png?ts=value.USD.LASTUPDATE">'+' </td>';
           
           crypto_data += '</tr>';
       });
@@ -233,31 +350,24 @@ function getNews() {
 
 // Summary Table End
 
-// TimeConverte for Summary Table
+/*
+ * Shorten number to thousands, millions, billions, etc.
+ * http://en.wikipedia.org/wiki/Metric_prefix
+ */
 
-  function yearTimeConverter(UNIX_timestamp){
-      var a = new Date(UNIX_timestamp * 1000);
-      var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-      var year = a.getFullYear();
-      var month = months[a.getMonth()];
-      var date = a.getDate();
+function shortenLargeNumber(num, digits) {
 
-      var time = date + ' ' + month + ' ' + year ;
-    return time;
-  }
 
-    function timeConverter_1(UNIX_timestamp){
-      var a = new Date(UNIX_timestamp * 1000);
-      var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-      var year = a.getFullYear();
-      var month = months[a.getMonth()];
-      var date = a.getDate();
+  const abbrev = ['', 'K', 'M', 'B', 'T'];
+  const unrangifiedOrder = Math.floor(Math.log10(Math.abs(num)) / 3)
+  const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ))
+  const suffix = abbrev[order];
 
-      var time = year + '-' + month + '-' + date ;
-    return time;
-  }
+  return (num / Math.pow(10, order * 3)).toFixed(2) + suffix;
 
-  // TimeConverte Summary Table End
+}
+
+
 
   // tool tip
 
