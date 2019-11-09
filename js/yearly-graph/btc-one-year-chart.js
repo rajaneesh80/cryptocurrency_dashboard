@@ -147,11 +147,11 @@ function colorText(elementId, url) {
         var oldVal = json["Data"][0]["close"];
         if (Number(oldVal) < Number(document.getElementById("btcLast").innerHTML)) {
           $("#btcTicker").css("color", "green");
-          document.getElementById("btcArrow").innerHTML = "<img src='../../img/arrow-g.png' style='max-width:12px;'>";
+          document.getElementById("btcArrow").innerHTML = "<img src='../img/arrow-g.png' style='max-width:12px;'>";
         }
         else {
           $("#btcTicker").css("color", "red");
-          document.getElementById("btcArrow").innerHTML = "<img src='../../img/arrow-r.png' style='max-width:12px;'>";
+          document.getElementById("btcArrow").innerHTML = "<img src='../img/arrow-r.png' style='max-width:12px;'>";
         }
       }
 

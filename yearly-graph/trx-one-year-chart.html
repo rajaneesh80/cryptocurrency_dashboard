@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
   <!-- Custome CSS -->
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../css/style.css">
 
   <!-- jquery -->
 
@@ -33,43 +33,23 @@
   <!-- print_filter -->
   <script type="text/javascript" src="js/test_filters.js"></script>
 
-<!-- -->
-
-  <!-- D3- Version 3 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
--->
-
-<!--
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crossfilter/1.3.12/crossfilter.min.js"></script>
-  -->
-
-  <!-- dc version 2 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/dc/2.1.8/dc.min.js"></script>
-  -->
-
-  <!-- Q version 1 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/queue-async/1.0.7/queue.min.js"></script>
--->
-
-<!-- -->
 
   <!-- Fontawesome core CSS -->
 
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
     integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-
-  
-
-</head>
+  </head>
 
 <body>
 
 <!--Navbar -->
 
+<!--Navbar -->
+
 <nav class="mb-1 navbar navbar-expand-lg navbar-dark bg-dark">
 
-  <a class="navbar-brand" href="index.html">
-    <img src="img/crptw.png" height="30" width="30" class="d-inline-block align-top"
+  <a class="navbar-brand" href="../index.html">
+    <img src="../img/crptw.png" height="30" width="30" class="d-inline-block align-top"
       alt="">Crypto Dashboard </a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
@@ -80,27 +60,28 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
       <ul class="navbar-nav ml-auto nav-flex-icons">
-        
-          <li class="nav-item active">
-            <a class="nav-link waves-effect waves-light" href="index.html"> <i class="fas fa-home icon-nav"></i> Home <span class="sr-only"> (current) </a>
-          </li>
 
-          <li class="nav-item active">
-            <a class="nav-link waves-effect waves-light" href="table.html"> <i class="fas fa-home icon-nav"></i> Table <span class="sr-only"> (current) </a>
-          </li>
+        <li class="nav-item active">
+          <a class="nav-link waves-effect waves-light" href="../index.html"> <i class="fas fa-home icon-nav"></i> Home <span class="sr-only"> (current) </a>
+        </li>
 
-          
-          <li class="nav-item active">
-            <a class="nav-link waves-effect waves-light" href="all-coin-analysis.html"> <i class="fas fa-home icon-nav"></i> All-Coins-Analysis <span class="sr-only"> (current) </a>
-          </li>
+        <li class="nav-item active">
+          <a class="nav-link waves-effect waves-light" href="../table.html"> <i class="fas fa-home icon-nav"></i> Table <span class="sr-only"> (current) </a>
+        </li>
 
-           <li class="nav-item active">
-            <a class="nav-link waves-effect waves-light" href="news.html"> <i class="fas fa-home icon-nav"></i>  News <span class="sr-only"> (current) </a>
-          </li>
+        <li class="nav-item active">
+          <a class="nav-link waves-effect waves-light" href="../all-coin-analysis.html"> <i class="fas fa-home icon-nav"></i> All-Coins-Analysis <span class="sr-only"> (current) </a>
+        </li>
 
-        </ul>
+         <li class="nav-item active">
+          <a class="nav-link waves-effect waves-light" href="../news.html"> <i class="fas fa-home icon-nav"></i>  News <span class="sr-only"> (current) </a>
+        </li>
+
+      </ul>
     </div>
 </nav>
+
+<!-- Nav end -->
 
 <!-- last update -->
 
@@ -131,7 +112,7 @@
 
           <div id="trx" class="col-md-12 col-sm-12">
             <h4> Current TRX Value </h4>
-            <img src="img/trx.png" height="30" width="30" class=""alt="">
+            <img src="../img/trx.png" height="30" width="30" class=""alt="">
             <div id="trxTicker"> <span id="trxArrow"></span> 1 TRX = $<span id="trxLast"></span></div>
           </div>
 
@@ -220,9 +201,7 @@
       $('#year').text(new Date().getFullYear());
     </script>
 
-<!-- <script src="js/main.js"> </script> -->
-
-<script src="js/trx-one-year-chart.js"> </script>
+    <script src="../js/yearly-graph/trx-one-year-chart.js"> </script>
 
 
 

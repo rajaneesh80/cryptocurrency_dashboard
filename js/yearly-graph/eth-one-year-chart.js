@@ -147,11 +147,11 @@ function colorText(elementId, url) {
         var oldVal = json["Data"][0]["close"];
         if (Number(oldVal) < Number(document.getElementById("ethLast").innerHTML)) {
           $("#ethTicker").css("color", "green");
-          document.getElementById("ethArrow").innerHTML = "<img src='img/arrow-g.png' style='max-width:12px;'>";
+          document.getElementById("ethArrow").innerHTML = "<img src='../img/arrow-g.png' style='max-width:12px;'>";
         }
         else {
           $("#ethTicker").css("color", "red");
-          document.getElementById("ethArrow").innerHTML = "<img src='img/arrow-r.png' style='max-width:12px;'>";
+          document.getElementById("ethArrow").innerHTML = "<img src='../img/arrow-r.png' style='max-width:12px;'>";
         }
       }
 

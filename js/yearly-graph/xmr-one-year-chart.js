@@ -147,11 +147,11 @@ function colorText(elementId, url) {
         var oldVal = json["Data"][0]["close"];
         if (Number(oldVal) < Number(document.getElementById("xmrLast").innerHTML)) {
           $("#xmrTicker").css("color", "green");
-          document.getElementById("xmrArrow").innerHTML = "<img src='img/arrow-g.png' style='max-width:12px;'>";
+          document.getElementById("xmrArrow").innerHTML = "<img src='../img/arrow-g.png' style='max-width:12px;'>";
         }
         else {
           $("#xmrTicker").css("color", "red");
-          document.getElementById("xmrArrow").innerHTML = "<img src='img/arrow-r.png' style='max-width:12px;'>";
+          document.getElementById("xmrArrow").innerHTML = "<img src='../img/arrow-r.png' style='max-width:12px;'>";
         }
       }
 

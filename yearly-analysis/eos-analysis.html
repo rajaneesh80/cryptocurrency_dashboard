@@ -9,12 +9,6 @@
 
 
   <title> EOS-Yearly-Analysis </title>
-
-  <!-- print filter -->
-
-
-   <!-- jquery -->
-
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"> </script>
   <!-- d3 version 3 -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
@@ -27,34 +21,33 @@
   <!-- Colorbrewer 1 -->
   <script src="https://d3js.org/colorbrewer.v1.min.js"></script>
   <!-- print_filter -->
-  <script type="text/javascript" src="js/test_filters.js"></script>
+  <script type="text/javascript" src="../js/test_filters.js"></script>
 
-  <script type="text/javascript" src="dc-resizing.js"></script>
+
   <!-- Bootstrap core CSS -->
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
   <!-- Custome CSS -->
 
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../css/style.css">
 
  <!-- Fontawesome core CSS -->
 
  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
     integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-
-  
-
 </head>
 
 <body>
 
 <!--Navbar -->
 
+<!--Navbar -->
+
 <nav class="mb-1 navbar navbar-expand-lg navbar-dark bg-dark">
 
-  <a class="navbar-brand" href="index.html">
-    <img src="img/crptw.png" height="30" width="30" class="d-inline-block align-top"
+  <a class="navbar-brand" href="../index.html">
+    <img src="../img/crptw.png" height="30" width="30" class="d-inline-block align-top"
       alt="">Crypto Dashboard </a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
@@ -65,27 +58,28 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
       <ul class="navbar-nav ml-auto nav-flex-icons">
+        
+          <li class="nav-item active">
+            <a class="nav-link waves-effect waves-light" href="../index.html"> <i class="fas fa-home icon-nav"></i> Home <span class="sr-only"> (current) </a>
+          </li>
 
-        <li class="nav-item active">
-          <a class="nav-link waves-effect waves-light" href="index.html"> <i class="fas fa-home icon-nav"></i> Home <span class="sr-only"> (current) </a>
-        </li>
+          <li class="nav-item active">
+            <a class="nav-link waves-effect waves-light" href="../table.html"> <i class="fas fa-home icon-nav"></i> Table <span class="sr-only"> (current) </a>
+          </li>
 
-        <li class="nav-item active">
-          <a class="nav-link waves-effect waves-light" href="table.html"> <i class="fas fa-home icon-nav"></i> Table <span class="sr-only"> (current) </a>
-        </li>
+           <li class="nav-item active">
+            <a class="nav-link waves-effect waves-light" href="../all-coin-analysis.html"> <i class="fas fa-home icon-nav"></i> All-Coins-Analysis <span class="sr-only"> (current) </a>
+          </li>
 
-        <li class="nav-item active">
-          <a class="nav-link waves-effect waves-light" href="all-coin-analysis.html"> <i class="fas fa-home icon-nav"></i> All-Coins-Analysis <span class="sr-only"> (current) </a>
-        </li>
+           <li class="nav-item active">
+            <a class="nav-link waves-effect waves-light" href="../news.html"> <i class="fas fa-home icon-nav"></i>  News <span class="sr-only"> (current) </a>
+          </li>
 
-         <li class="nav-item active">
-          <a class="nav-link waves-effect waves-light" href="news.html"> <i class="fas fa-home icon-nav"></i>  News <span class="sr-only"> (current) </a>
-        </li>
-
-      </ul>
+        </ul>
     </div>
 </nav>
 
+<!-- nav end -->
 <!-- Nav end -->
 
 <!-- -->
@@ -204,7 +198,7 @@
     </script>
     <!-- -->
 
-  <script src="js/eos-analysis.js"> </script>
+  <script src="../js/yearly-analysis/eos-analysis.js"> </script>
 
 
 

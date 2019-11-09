@@ -147,11 +147,11 @@ function colorText(elementId, url) {
         var oldVal = json["Data"][0]["close"];
         if (Number(oldVal) < Number(document.getElementById("trxLast").innerHTML)) {
           $("#trxTicker").css("color", "green");
-          document.getElementById("trxArrow").innerHTML = "<img src='img/arrow-g.png' style='max-width:12px;'>";
+          document.getElementById("trxArrow").innerHTML = "<img src='../img/arrow-g.png' style='max-width:12px;'>";
         }
         else {
           $("#trxTicker").css("color", "red");
-          document.getElementById("trxArrow").innerHTML = "<img src='img/arrow-r.png' style='max-width:12px;'>";
+          document.getElementById("trxArrow").innerHTML = "<img src='../img/arrow-r.png' style='max-width:12px;'>";
         }
       }
 

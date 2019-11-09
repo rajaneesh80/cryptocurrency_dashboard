@@ -147,11 +147,11 @@ function colorText(elementId, url) {
         var oldVal = json["Data"][0]["close"];
         if (Number(oldVal) < Number(document.getElementById("bnbLast").innerHTML)) {
           $("#bnbTicker").css("color", "green");
-          document.getElementById("bnbArrow").innerHTML = "<img src='img/arrow-g.png' style='max-width:12px;'>";
+          document.getElementById("bnbArrow").innerHTML = "<img src='../img/arrow-g.png' style='max-width:12px;'>";
         }
         else {
           $("#bnbTicker").css("color", "red");
-          document.getElementById("bnbArrow").innerHTML = "<img src='img/arrow-r.png' style='max-width:12px;'>";
+          document.getElementById("bnbArrow").innerHTML = "<img src='../img/arrow-r.png' style='max-width:12px;'>";
         }
       }
 

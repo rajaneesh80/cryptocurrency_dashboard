@@ -365,10 +365,7 @@ function shortenLargeNumber(num, digits) {
 
   return (num / Math.pow(10, order * 3)).toFixed(2) + suffix;
 
-}
+};
 
-
-
-  // tool tip
-
+////// end ///////
 
