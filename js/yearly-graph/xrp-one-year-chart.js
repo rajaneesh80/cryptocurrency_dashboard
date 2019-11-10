@@ -1,4 +1,4 @@
-// Bitcoinn 360 days chart
+// XRP 360 days chart
 
 
 var url = "https://min-api.cryptocompare.com/data/histoday?fsym=XRP&tsym=USD&limit=365&aggregate=1&e=CCCAGG";

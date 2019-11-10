@@ -1,4 +1,4 @@
-// Bitcoinn 360 days chart
+// BTC 360 days chart
 
 
 var url = "https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&limit=366&aggregate=3&e=CCCAGG";
@@ -11,66 +11,78 @@ var url = "https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&lim
 
     if (error) throw error;
 
-var margin = { left:80, right:100, top:50, bottom:100 },
-    height = 500 - margin.top - margin.bottom, 
-    width = 600 - margin.left - margin.right;
 
-var tooltip = d3.select('body')
-.append('div')
-.style('position', 'absolute')
-.style('padding', '0 10px')
-.style('background', 'white')
-.style('opacity', 0)
+    // set the dimensions and margins of the graph
+    var margin = {top: 20, right: 20, bottom: 30, left: 50},
+    width = 600 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
 
-var svg = d3.select("#chart-area")
-    .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    .call(responsivefy)
-    
-var g = svg.append("g")
-        .attr("transform", "translate(" + margin.left + 
-            ", " + margin.top + ")");
+    // set the ranges
+    var x = d3.scaleTime().range([0, width]);
+    var y = d3.scaleLinear().range([height, 0]);
 
-    var x = d3.scaleTime()
-        .range([0, width])
+    // define the line
+    var valueline = d3.line()
+    .x(function(d) { return x(d.time); })
+    .y(function(d) { return y(d.close); });
 
-    var y = d3.scaleLinear()
-        .range([height, 0]);
+    var div = d3.select("body").append("div")
+    .attr("class", "tooltip")
+    .style("opacity", 0);
 
-    var line = d3.line()
-        .x(function(d) { return x(d.time); })
-        .y(function(d) { return y(d.close); });
+    // append the svg obgect to the body of the page
+    // appends a 'group' element to 'svg'
+    // moves the 'group' element to the top left margin
+    var svg = d3.select("#chart-area")
+        .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform",
+              "translate(" + margin.left + "," + margin.top + ")")
+        .call(responsivefy);
 
-    x.domain(d3.extent(data, function(d) { return d.time; }));
-    y.domain(d3.extent(data, function(d) { return d.close; }));
+      // scale the range of the data
+      x.domain(d3.extent(data, function(d) { return d.time; }));
+      y.domain([0, d3.max(data, function(d) { return d.close; })]);
 
-    var bisectDate = d3.bisector(function(d) { return d.time; }).left;
+   // add the valueline path.
+    svg.append("path")
+     .data([data])
+     .attr("class", "line")
+     .attr("d", valueline);
 
-    g.append("g")
-        .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(x))
-        
+    // add the dots with tooltips
+    svg.selectAll("dot")
+     .data(data)
+     .enter().append("circle")
+     .attr("r", 3)
+     .attr("cx", function(d) { return x(d.time); })
+     .attr("cy", function(d) { return y(d.close); })
+     .on("mouseover", function(d) {
+       div.transition()
+         .duration(200)
+         .style("opacity", .9);
+       div.html(d.time.toLocaleDateString() + "<br/>" + "£"+ d.close)
+         .style("left", (d3.event.pageX) + "px")
+         .style("top", (d3.event.pageY - 28) + "px");
+       })
+      .on("mouseout", function(d) {
+        div.transition()
+         .duration(500)
+         .style("opacity", 0);
+       });
 
-    g.append("g")
-        .call(d3.axisLeft(y))
-      .append("text")
-        .attr("fill", "#000")
-        .attr("transform", "rotate(-90)")
-        .attr("y", 20)
-        .attr("text-anchor", "end")
-        .text("Price ($)");
+        // add the X Axis
+      svg.append("g")
+          .attr("transform", "translate(0," + height + ")")
+          .call(d3.axisBottom(x));
 
-    g.append("path")
-        .datum(data)
-        .attr("fill", "none")
-        .attr("stroke", "#0d146e")
-        .attr("stroke-linejoin", "round")
-        .attr("stroke-linecap", "round")
-        .attr("stroke-width", 2)
-        .attr("d", line);
+      // add the Y Axis
+      svg.append("g")
+          .call(d3.axisLeft(y));
 
-    function responsivefy(svg) { 
+       function responsivefy(svg) {
               
             // Container is the DOM element, svg is appended. 
             // Then we measure the container and find its 
@@ -222,7 +234,7 @@ function timeConverter(UNIX_timestamp){
 
       var time = date + ' ' + month + ' ' + year ;
     return time;
-  }
+  };
 
 
 ///////

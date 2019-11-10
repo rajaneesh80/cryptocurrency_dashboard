@@ -1,3 +1,5 @@
+//LINK Analysis
+
 var gainOrLossChart = dc.pieChart('#gain-loss-chart');
 var fluctuationChart = dc.barChart('#fluctuation-chart');
 var monthlyChart = dc.pieChart('#monthly-chart');

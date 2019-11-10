@@ -1,4 +1,4 @@
-// Bitcoinn 360 days chart
+// XMR 360 days chart
 
 
 var url = "https://min-api.cryptocompare.com/data/histoday?fsym=XMR&tsym=USD&limit=366&aggregate=3&e=CCCAGG";

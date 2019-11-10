@@ -1,4 +1,4 @@
-// Bitcoinn 360 days chart
+// BNB 360 days chart
 
 
 var url = "https://min-api.cryptocompare.com/data/histoday?fsym=BNB&tsym=USD&limit=365&aggregate=1&e=CCCAGG";

@@ -1,4 +1,4 @@
-// Bitcoinn 360 days chart
+// LTC 360 days chart
 
 
 var url = "https://min-api.cryptocompare.com/data/histoday?fsym=LTC&tsym=USD&limit=365&aggregate=1&e=CCCAGG";

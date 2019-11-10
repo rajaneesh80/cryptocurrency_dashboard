@@ -1,4 +1,4 @@
-// Bitcoinn 360 days chart
+// OKB 360 days chart
 
 
 var url = "https://min-api.cryptocompare.com/data/histoday?fsym=OKB&tsym=USD&limit=366&aggregate=3&e=CCCAGG";

@@ -1,390 +1,375 @@
 <html lang="en">
 
 <head>
-  
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
 
-  <title> Crypto-Coins-Analysis </title>
+    <title> Crypto-Coins-Analysis </title>
 
-   <!-- jquery -->
+    <!-- jquery -->
 
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js"> </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"> </script>
 
-   <!-- Bootstrap core CSS -->
+    <!-- Bootstrap core CSS -->
 
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-  <!-- Custome CSS -->
+    <!-- Custome CSS -->
 
-  <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 
- <!-- Fontawesome core CSS -->
+    <!-- Fontawesome core CSS -->
 
- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
-    integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
 </head>
 
 <body>
 
-<!--Navbar -->
+    <!--Navbar -->
 
-<nav class="mb-1 navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="mb-1 navbar navbar-expand-lg navbar-dark bg-dark">
 
-  <a class="navbar-brand" href="index.html">
-    <img src="img/crptw.png" height="30" width="30" class="d-inline-block align-top"
-      alt="">Crypto Dashboard </a>
+        <a class="navbar-brand" href="index.html">
+            <img src="img/crptw.png" height="30" width="30" class="d-inline-block align-top" alt="">Crypto Dashboard </a>
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333" aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
 
-      <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon"></span>
 
-   </button>
+        </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
-      <ul class="navbar-nav ml-auto nav-flex-icons">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
+            <ul class="navbar-nav ml-auto nav-flex-icons">
 
-        <li class="nav-item active">
-          <a class="nav-link waves-effect waves-light" href="index.html"> <i class="fas fa-home icon-nav"></i> Home <span class="sr-only"> (current) </a>
-        </li>
+                <li class="nav-item active">
+                    <a class="nav-link waves-effect waves-light" href="index.html"> <i class="fas fa-home icon-nav"></i> Home <span class="sr-only"> (current) </a>
+                </li>
 
-        <li class="nav-item active">
-          <a class="nav-link waves-effect waves-light" href="table.html"> <i class="fas fa-home icon-nav"></i> Table <span class="sr-only"> (current) </a>
-        </li>
-
-      
-        <li class="nav-item active">
-          <a class="nav-link waves-effect waves-light" href="all-coin-analysis.html"> <i class="fas fa-home icon-nav"></i> All-Coins-Analysis <span class="sr-only"> (current) </a>
-        </li>
-
-         <li class="nav-item active">
-          <a class="nav-link waves-effect waves-light" href="news.html"> <i class="fas fa-home icon-nav"></i>  News <span class="sr-only"> (current) </a>
-        </li>
-
-      </ul>
-    </div>
-</nav>
-
-<!-- Nav end -->
-
-<!-- -->
-
-  <!-- Bootstrap grid setup -->
-<div class="container">
-  <div class="row text-center">
-    <div class="col-md-12">
-      <h4 class=""> Crypto Main Coins Yearly Graph and and Analysis </h4>
-    </div>
-  </div> <!-- row -->
-</div> <!-- container -->
+                <li class="nav-item active">
+                    <a class="nav-link waves-effect waves-light" href="table.html"> <i class="fas fa-home icon-nav"></i> Table <span class="sr-only"> (current) </a>
+                </li>
 
 
+                <li class="nav-item active">
+                    <a class="nav-link waves-effect waves-light" href="all-coin-analysis.html"> <i class="fas fa-home icon-nav"></i> All-Coins-Analysis <span class="sr-only"> (current) </a>
+                </li>
 
+                <li class="nav-item active">
+                    <a class="nav-link waves-effect waves-light" href="news.html"> <i class="fas fa-home icon-nav"></i> News <span class="sr-only"> (current) </a>
+                </li>
 
-
-<!-- -->
-  <div class="container" >
-
-    <div class="row text-center">
-
-        <div id="" class="col-sm-12 col-md-1"> 1 </div>
-        <div id="" class="col-sm-12 col-md-1">  Bitcoin </div>
-
-        <div id="" class="col-sm-12 col-md-2"> 
-          <img src="img/btc.png" height="30" width="30" class=""alt="">
+            </ul>
         </div>
+    </nav>
 
-        
-        <div id="" class="col-sm-12 col-md-4">
-        <a href="yearly-graph/bitcoin-one-year-chart.html" data-toggle="tooltip" title="Yearly Graph" style='color:black;'> BTC Yearly Graph </a>
-        </div>
+    <!-- Nav end -->
 
-        <div id="" class="col-sm-12 col-md-4"> 
-        <a href="yearly-analysis/bitcoin-analysis.html" data-toggle="tooltip" data-placement="bottom" title="Yearly Analysis">
-        BTC Yearly Analysis </a>
-        </div>
+    <!-- Bootstrap grid setup -->
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-12">
+                <h4 class=""> Crypto Main Coins Yearly Graph and and Analysis </h4>
+            </div>
+        </div> <!-- row -->
+    </div> <!-- container -->
 
-    </div> <!--BTC  row-->
-
-
-    <div class="row text-center">
-
-        <div id="" class="col-sm-12 col-md-1"> 2 </div>
-        <div id="" class="col-sm-12 col-md-1">  Ethereum </div>
-
-        <div id="" class="col-sm-12 col-md-2"> 
-          <img src="img/eth.png" height="30" width="30" class=""alt="">
-        </div>
-
-        <div id="" class="col-sm-12 col-md-4">
-        <a href="yearly-graph/ethereum-one-year-chart.html" data-toggle="tooltip" title="Yearly Graph" style='color:black;'> ETH Yearly Graph </a>
-        </div>
-
-        <div id="" class="col-sm-12 col-md-4"> 
-        <a href="yearly-analysis/ethereum-analysis.html" data-toggle="tooltip" data-placement="bottom" title="Yearly Analysis">
-        ETH Yearly Analysis </a>
-        </div>
-
-    </div> <!-- Eth Graphs row-->
+    <!-- -->
+    <div class="container">
 
         <div class="row text-center">
 
-        <div id="" class="col-sm-12 col-md-1"> 3 </div>
-        <div id="" class="col-sm-12 col-md-1">  Bitcoin-Cash </div>
+            <div id="" class="col-sm-12 col-md-1"> 1 </div>
+            <div id="" class="col-sm-12 col-md-1"> Bitcoin </div>
 
-        <div id="" class="col-sm-12 col-md-2"> 
-          <img src="img/bch.png" height="30" width="30" class=""alt="">
+            <div id="" class="col-sm-12 col-md-2">
+                <img src="img/btc.png" height="30" width="30" class="" alt="">
+            </div>
+
+
+            <div id="" class="col-sm-12 col-md-4">
+                <a href="yearly-graph/bitcoin-one-year-chart.html" data-toggle="tooltip" title="Yearly Graph" style='color:black;'> BTC Yearly Graph </a>
+            </div>
+
+            <div id="" class="col-sm-12 col-md-4">
+                <a href="yearly-analysis/bitcoin-analysis.html" data-toggle="tooltip" data-placement="bottom" title="Yearly Analysis">
+                    BTC Yearly Analysis </a>
+            </div>
+
         </div>
-
-        
-        <div id="" class="col-sm-12 col-md-4">
-        <a href="yearly-graph/bch-one-year-chart.html" data-toggle="tooltip" title="Yearly Graph" style='color:black;'> BCH Yearly Graph </a>
-        </div>
-
-        <div id="" class="col-sm-12 col-md-4"> 
-        <a href="yearly-analysis/bch-analysis.html" data-toggle="tooltip" data-placement="bottom" title="Yearly Analysis">
-        BCH Yearly Analysis </a>
-        </div>
-
-    </div> <!--BCH  row-->
-
-        <div class="row text-center">
-
-        <div id="" class="col-sm-12 col-md-1"> 4 </div>
-        <div id="" class="col-sm-12 col-md-1">  EOS </div>
-
-        <div id="" class="col-sm-12 col-md-2"> 
-          <img src="img/eos.png" height="30" width="30" class=""alt="">
-        </div>
-
-        <div id="" class="col-sm-12 col-md-4">
-        <a href="yearly-graph/eos-one-year-chart.html" data-toggle="tooltip" title="Yearly Graph" style='color:black;'> EOS Yearly Graph </a>
-        </div>
-
-        <div id="" class="col-sm-12 col-md-4"> 
-        <a href="yearly-analysis/eos-analysis.html" data-toggle="tooltip" data-placement="bottom" title="Yearly Analysis">
-        EOS Yearly Analysis </a>
-        </div>
-
-    </div> <!-- EOS Graphs row-->
-
-            <div class="row text-center">
-
-        <div id="" class="col-sm-12 col-md-1"> 5 </div>
-        <div id="" class="col-sm-12 col-md-1">  Litecoin </div>
-
-        <div id="" class="col-sm-12 col-md-2"> 
-          <img src="img/ltc.png" height="30" width="30" class=""alt="">
-        </div>
-
-        
-        <div id="" class="col-sm-12 col-md-4">
-        <a href="yearly-graph/ltc-one-year-chart.html" data-toggle="tooltip" title="Yearly Graph" style='color:black;'> LTC Yearly Graph </a>
-        </div>
-
-        <div id="" class="col-sm-12 col-md-4"> 
-        <a href="yearly-analysis/lite-analysis.html" data-toggle="tooltip" data-placement="bottom" title="Yearly Analysis">
-        LTC Yearly Analysis </a>
-        </div>
-
-    </div> <!-- LTC   row-->
+        <!--BTC  row-->
 
 
         <div class="row text-center">
 
-        <div id="" class="col-sm-12 col-md-1"> 6 </div>
-        <div id="" class="col-sm-12 col-md-1">  XRP </div>
+            <div id="" class="col-sm-12 col-md-1"> 2 </div>
+            <div id="" class="col-sm-12 col-md-1"> Ethereum </div>
 
-        <div id="" class="col-sm-12 col-md-2"> 
-          <img src="img/xrp.png" height="30" width="30" class=""alt="">
-        </div>
+            <div id="" class="col-sm-12 col-md-2">
+                <img src="img/eth.png" height="30" width="30" class="" alt="">
+            </div>
 
-        
-        <div id="" class="col-sm-12 col-md-4">
-        <a href="yearly-graph/xrp-one-year-chart.html" data-toggle="tooltip" title="Yearly Graph" style='color:black;'> XRP Yearly Graph </a>
-        </div>
+            <div id="" class="col-sm-12 col-md-4">
+                <a href="yearly-graph/ethereum-one-year-chart.html" data-toggle="tooltip" title="Yearly Graph" style='color:black;'> ETH Yearly Graph </a>
+            </div>
 
-        <div id="" class="col-sm-12 col-md-4"> 
-        <a href="yearly-analysis/xrp-analysis.html" data-toggle="tooltip" data-placement="bottom" title="Yearly Analysis">
-        XRP Yearly Analysis </a>
-        </div>
+            <div id="" class="col-sm-12 col-md-4">
+                <a href="yearly-analysis/ethereum-analysis.html" data-toggle="tooltip" data-placement="bottom" title="Yearly Analysis">
+                    ETH Yearly Analysis </a>
+            </div>
 
-    </div> <!-- XRP  row-->
-
-
-    <div class="row text-center">
-
-        <div id="" class="col-sm-12 col-md-1"> 7 </div>
-        <div id="" class="col-sm-12 col-md-1"> LINK </div>
-
-        <div id="" class="col-sm-12 col-md-2"> 
-          <img src="img/link.png" height="30" width="30" class=""alt="">
-        </div>
-
-        <div id="" class="col-sm-12 col-md-4">
-        <a href="yearly-graph/link-one-year-chart.html" data-toggle="tooltip" title="Yearly Graph" style='color:black;'> LINK Yearly Graph </a>
-        </div>
-
-        <div id="" class="col-sm-12 col-md-4"> 
-        <a href="yearly-analysis/link-analysis.html" data-toggle="tooltip" data-placement="bottom" title="Yearly Analysis">
-        LINK Yearly Analysis </a>
-        </div>
-
-    </div> <!-- LINK Graphs row-->
+        </div> <!-- Eth Graphs row-->
 
         <div class="row text-center">
 
-        <div id="" class="col-sm-12 col-md-1"> 8 </div>
-        <div id="" class="col-sm-12 col-md-1">  BNB </div>
+            <div id="" class="col-sm-12 col-md-1"> 3 </div>
+            <div id="" class="col-sm-12 col-md-1"> Bitcoin-Cash </div>
 
-        <div id="" class="col-sm-12 col-md-2"> 
-          <img src="img/bnb.png" height="30" width="30" class=""alt="">
+            <div id="" class="col-sm-12 col-md-2">
+                <img src="img/bch.png" height="30" width="30" class="" alt="">
+            </div>
+
+
+            <div id="" class="col-sm-12 col-md-4">
+                <a href="yearly-graph/bch-one-year-chart.html" data-toggle="tooltip" title="Yearly Graph" style='color:black;'> BCH Yearly Graph </a>
+            </div>
+
+            <div id="" class="col-sm-12 col-md-4">
+                <a href="yearly-analysis/bch-analysis.html" data-toggle="tooltip" data-placement="bottom" title="Yearly Analysis">
+                    BCH Yearly Analysis </a>
+            </div>
+
         </div>
-
-        
-        <div id="" class="col-sm-12 col-md-4">
-        <a href="yearly-graph/bnb-one-year-chart.html" data-toggle="tooltip" title="Yearly Graph" style='color:black;'> BNB Yearly Graph </a>
-        </div>
-
-        <div id="" class="col-sm-12 col-md-4"> 
-        <a href="yearly-analysis/bnb-analysis.html" data-toggle="tooltip" data-placement="bottom" title="Yearly Analysis">
-        BNB Yearly Analysis </a>
-        </div>
-
-    </div> <!-- BNB  row-->
+        <!--BCH  row-->
 
         <div class="row text-center">
 
-        <div id="" class="col-sm-12 col-md-1"> 9 </div>
-        <div id="" class="col-sm-12 col-md-1">  TRX </div>
+            <div id="" class="col-sm-12 col-md-1"> 4 </div>
+            <div id="" class="col-sm-12 col-md-1"> EOS </div>
 
-        <div id="" class="col-sm-12 col-md-2"> 
-          <img src="img/trx.png" height="30" width="30" class=""alt="">
-        </div>
+            <div id="" class="col-sm-12 col-md-2">
+                <img src="img/eos.png" height="30" width="30" class="" alt="">
+            </div>
 
-        <div id="" class="col-sm-12 col-md-4">
-        <a href="yearly-graph/trx-one-year-chart.html" data-toggle="tooltip" title="Yearly Graph" style='color:black;'> TRX Yearly Graph </a>
-        </div>
+            <div id="" class="col-sm-12 col-md-4">
+                <a href="yearly-graph/eos-one-year-chart.html" data-toggle="tooltip" title="Yearly Graph" style='color:black;'> EOS Yearly Graph </a>
+            </div>
 
-        <div id="" class="col-sm-12 col-md-4"> 
-        <a href="yearly-analysis/trx-analysis.html" data-toggle="tooltip" data-placement="bottom" title="Yearly Analysis">
-        TRX Yearly Analysis </a>
-        </div>
+            <div id="" class="col-sm-12 col-md-4">
+                <a href="yearly-analysis/eos-analysis.html" data-toggle="tooltip" data-placement="bottom" title="Yearly Analysis">
+                    EOS Yearly Analysis </a>
+            </div>
 
-    </div> <!-- TRX Graphs row-->
+        </div> <!-- EOS Graphs row-->
 
         <div class="row text-center">
 
-        <div id="" class="col-sm-12 col-md-1"> 10 </div>
-        <div id="" class="col-sm-12 col-md-1"> ETC </div>
+            <div id="" class="col-sm-12 col-md-1"> 5 </div>
+            <div id="" class="col-sm-12 col-md-1"> Litecoin </div>
 
-        <div id="" class="col-sm-12 col-md-2"> 
-          <img src="img/etc.png" height="30" width="30" class=""alt="">
+            <div id="" class="col-sm-12 col-md-2">
+                <img src="img/ltc.png" height="30" width="30" class="" alt="">
+            </div>
+
+
+            <div id="" class="col-sm-12 col-md-4">
+                <a href="yearly-graph/ltc-one-year-chart.html" data-toggle="tooltip" title="Yearly Graph" style='color:black;'> LTC Yearly Graph </a>
+            </div>
+
+            <div id="" class="col-sm-12 col-md-4">
+                <a href="yearly-analysis/lite-analysis.html" data-toggle="tooltip" data-placement="bottom" title="Yearly Analysis">
+                    LTC Yearly Analysis </a>
+            </div>
+
+        </div> <!-- LTC   row-->
+
+
+        <div class="row text-center">
+
+            <div id="" class="col-sm-12 col-md-1"> 6 </div>
+            <div id="" class="col-sm-12 col-md-1"> XRP </div>
+
+            <div id="" class="col-sm-12 col-md-2">
+                <img src="img/xrp.png" height="30" width="30" class="" alt="">
+            </div>
+
+
+            <div id="" class="col-sm-12 col-md-4">
+                <a href="yearly-graph/xrp-one-year-chart.html" data-toggle="tooltip" title="Yearly Graph" style='color:black;'> XRP Yearly Graph </a>
+            </div>
+
+            <div id="" class="col-sm-12 col-md-4">
+                <a href="yearly-analysis/xrp-analysis.html" data-toggle="tooltip" data-placement="bottom" title="Yearly Analysis">
+                    XRP Yearly Analysis </a>
+            </div>
+
+        </div> <!-- XRP  row-->
+
+
+        <div class="row text-center">
+
+            <div id="" class="col-sm-12 col-md-1"> 7 </div>
+            <div id="" class="col-sm-12 col-md-1"> LINK </div>
+
+            <div id="" class="col-sm-12 col-md-2">
+                <img src="img/link.png" height="30" width="30" class="" alt="">
+            </div>
+
+            <div id="" class="col-sm-12 col-md-4">
+                <a href="yearly-graph/link-one-year-chart.html" data-toggle="tooltip" title="Yearly Graph" style='color:black;'> LINK Yearly Graph </a>
+            </div>
+
+            <div id="" class="col-sm-12 col-md-4">
+                <a href="yearly-analysis/link-analysis.html" data-toggle="tooltip" data-placement="bottom" title="Yearly Analysis">
+                    LINK Yearly Analysis </a>
+            </div>
+
+        </div> <!-- LINK Graphs row-->
+
+        <div class="row text-center">
+
+            <div id="" class="col-sm-12 col-md-1"> 8 </div>
+            <div id="" class="col-sm-12 col-md-1"> BNB </div>
+
+            <div id="" class="col-sm-12 col-md-2">
+                <img src="img/bnb.png" height="30" width="30" class="" alt="">
+            </div>
+
+
+            <div id="" class="col-sm-12 col-md-4">
+                <a href="yearly-graph/bnb-one-year-chart.html" data-toggle="tooltip" title="Yearly Graph" style='color:black;'> BNB Yearly Graph </a>
+            </div>
+
+            <div id="" class="col-sm-12 col-md-4">
+                <a href="yearly-analysis/bnb-analysis.html" data-toggle="tooltip" data-placement="bottom" title="Yearly Analysis">
+                    BNB Yearly Analysis </a>
+            </div>
+
+        </div> <!-- BNB  row-->
+
+        <div class="row text-center">
+
+            <div id="" class="col-sm-12 col-md-1"> 9 </div>
+            <div id="" class="col-sm-12 col-md-1"> TRX </div>
+
+            <div id="" class="col-sm-12 col-md-2">
+                <img src="img/trx.png" height="30" width="30" class="" alt="">
+            </div>
+
+            <div id="" class="col-sm-12 col-md-4">
+                <a href="yearly-graph/trx-one-year-chart.html" data-toggle="tooltip" title="Yearly Graph" style='color:black;'> TRX Yearly Graph </a>
+            </div>
+
+            <div id="" class="col-sm-12 col-md-4">
+                <a href="yearly-analysis/trx-analysis.html" data-toggle="tooltip" data-placement="bottom" title="Yearly Analysis">
+                    TRX Yearly Analysis </a>
+            </div>
+
+        </div> <!-- TRX Graphs row-->
+
+        <div class="row text-center">
+
+            <div id="" class="col-sm-12 col-md-1"> 10 </div>
+            <div id="" class="col-sm-12 col-md-1"> ETC </div>
+
+            <div id="" class="col-sm-12 col-md-2">
+                <img src="img/etc.png" height="30" width="30" class="" alt="">
+            </div>
+
+
+            <div id="" class="col-sm-12 col-md-4">
+                <a href="yearly-graph/etc-one-year-chart.html" data-toggle="tooltip" title="Yearly Graph" style='color:black;'> ETC Yearly Graph </a>
+            </div>
+
+            <div id="" class="col-sm-12 col-md-4">
+                <a href="yearly-analysis/etc-analysis.html" data-toggle="tooltip" data-placement="bottom" title="Yearly Analysis">
+                    ETC Yearly Analysis </a>
+            </div>
+
+        </div> <!-- ETC  row-->
+
+        <div class="row text-center">
+
+            <div id="" class="col-sm-12 col-md-1"> 11 </div>
+            <div id="" class="col-sm-12 col-md-1"> OKB </div>
+
+            <div id="" class="col-sm-12 col-md-2">
+                <img src="img/okb.jpg" height="30" width="30" class="" alt="">
+            </div>
+
+            <div id="" class="col-sm-12 col-md-4">
+                <a href="yearly-graph/okb-one-year-chart.html" data-toggle="tooltip" title="Yearly Graph" style='color:black;'> OKB Yearly Graph </a>
+            </div>
+
+            <div id="" class="col-sm-12 col-md-4">
+                <a href="yearly-analysis/okb-analysis.html" data-toggle="tooltip" data-placement="bottom" title="Yearly Analysis">
+                    OKB Yearly Analysis </a>
+            </div>
+
+        </div> <!-- OKB Graphs row-->
+
+        <div class="row text-center">
+
+            <div id="" class="col-sm-12 col-md-1"> 12 </div>
+            <div id="" class="col-sm-12 col-md-1"> XMR </div>
+
+            <div id="" class="col-sm-12 col-md-2">
+                <img src="img/xmr.png" height="30" width="30" class="" alt="">
+            </div>
+
+
+            <div id="" class="col-sm-12 col-md-4">
+                <a href="yearly-graph/xmr-one-year-chart.html" data-toggle="tooltip" title="Yearly Graph" style='color:black;'> XMR Yearly Graph </a>
+            </div>
+
+            <div id="" class="col-sm-12 col-md-4">
+                <a href="yearly-analysis/xmr-analysis.html" data-toggle="tooltip" data-placement="bottom" title="Yearly Analysis">
+                    XMR Yearly Analysis </a>
+            </div>
+        </div> <!-- XMR  row-->
+    </div> <!-- main  cointainer -->
+
+    <!-- -->
+    <!-- FOOTER -->
+
+    <footer id="main-footer" class="text-center p-4">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+
+                    <a href="#"> <i class="fab fa-facebook-square fa-2x"> </i> </a>
+                    <a href="#"> <i class="fab fa-youtube fa-2x"> </i> </a>
+                    <a href="#"> <i class="fab fa-twitter-square fa-2x"></i> </a>
+                    <a href="#"> <i class="fab fa-linkedin fa-2x"></i> </a>
+
+                    <p> &copy;
+                        <span id="year"></span> Raj-Crypto_Currency_Dashboard </p>
+                </div>
+            </div>
         </div>
-
-        
-        <div id="" class="col-sm-12 col-md-4">
-        <a href="yearly-graph/etc-one-year-chart.html" data-toggle="tooltip" title="Yearly Graph" style='color:black;'> ETC Yearly Graph </a>
-        </div>
-
-        <div id="" class="col-sm-12 col-md-4"> 
-        <a href="yearly-analysis/etc-analysis.html" data-toggle="tooltip" data-placement="bottom" title="Yearly Analysis">
-        ETC Yearly Analysis </a>
-        </div>
-
-    </div> <!-- ETC  row-->
-
-    <div class="row text-center">
-
-        <div id="" class="col-sm-12 col-md-1"> 11 </div>
-        <div id="" class="col-sm-12 col-md-1">  OKB </div>
-
-        <div id="" class="col-sm-12 col-md-2"> 
-          <img src="img/okb.jpg" height="30" width="30" class=""alt="">
-        </div>
-
-        <div id="" class="col-sm-12 col-md-4">
-        <a href="yearly-graph/okb-one-year-chart.html" data-toggle="tooltip" title="Yearly Graph" style='color:black;'> OKB Yearly Graph </a>
-        </div>
-
-        <div id="" class="col-sm-12 col-md-4"> 
-        <a href="yearly-analysis/okb-analysis.html" data-toggle="tooltip" data-placement="bottom" title="Yearly Analysis">
-        OKB Yearly Analysis </a>
-        </div>
-
-    </div> <!-- OKB Graphs row-->
-
-      <div class="row text-center">
-
-        <div id="" class="col-sm-12 col-md-1"> 12 </div>
-        <div id="" class="col-sm-12 col-md-1">  XMR </div>
-
-        <div id="" class="col-sm-12 col-md-2"> 
-          <img src="img/xmr.png" height="30" width="30" class=""alt="">
-        </div>
-
-        
-        <div id="" class="col-sm-12 col-md-4">
-        <a href="yearly-graph/xmr-one-year-chart.html" data-toggle="tooltip" title="Yearly Graph" style='color:black;'> XMR Yearly Graph </a>
-        </div>
-
-        <div id="" class="col-sm-12 col-md-4"> 
-        <a href="yearly-analysis/xmr-analysis.html" data-toggle="tooltip" data-placement="bottom" title="Yearly Analysis">
-        XMR Yearly Analysis </a>
-        </div>
-
-    </div> <!-- XMR  row-->
+    </footer>
+    <!-- FOOTER End-->
 
 
 
-  </div> <!-- main  cointainer -->
-
- 
- 
-
-<!-- -->
-<!-- FOOTER -->
-
-<footer id="main-footer" class="text-center p-4">
-      <div class="container">
-        <div class="row">
-          <div class="col">
-
-              <a href="#"> <i class="fab fa-facebook-square fa-2x"> </i> </a>
-              <a href="#"> <i class="fab fa-youtube fa-2x"> </i> </a>
-              <a href="#"> <i class="fab fa-twitter-square fa-2x"></i> </a>
-              <a href="#"> <i class="fab fa-linkedin fa-2x"></i> </a>
-
-            <p> &copy;
-              <span id="year"></span> Raj-Crypto_Currency_Dashboard </p>
-          </div>
-        </div>
-      </div>
-</footer>
-<!-- FOOTER End-->
+    <!-- Bootstrap core JavaScript -->
 
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 
-  <!-- Bootstrap core JavaScript -->
-
- 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
     <!-- -->
     <script>
-      // Get the current year for the copyright
-      $('#year').text(new Date().getFullYear());
+        // Get the current year for the copyright
+        $('#year').text(new Date().getFullYear());
     </script>
     <!-- -->
 
- </body>
-</html>
+</body>
 
+</html>
