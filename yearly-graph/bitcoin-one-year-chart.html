@@ -80,91 +80,82 @@
 
     <!-- last update -->
 
-
     <div class="container">
         <div class="row">
             <div id="lastUpdated" class="col-sm-12 col-md-12 text-center text-danger"> </div>
         </div> <!-- row  -->
     </div>
-    <!--container  -->
+<br>
 
-    <!-- last update end -->
-
-    <br>
-
-    <!-- Bootstrap grid setup -->
-
-    <div id="" class="container">
-        <div class="row">
-
-            <div id="left-charts" class="col-sm-12 col-md-8">
-                <div class="row">
-                    <div id="chart-area" class="col-md-12">
-                        <h3 class="text-center"> One Year Bitcoin Prices in U.S. Dollars </h3>
-                    </div>
-                </div>
-            </div>
-
-            <div id="right-charts" class="col-sm-12 col-md-4">
-                <div class="row text-center">
-
-                    <div id="btc" class="col-md-12 col-sm-12">
-                        <h4> Current Bitcoin Value </h4>
-                        <img src="../img/btc.png" height="30" width="30" class="" alt="">
-                        <div id="btcTicker"> <span id="btcArrow"></span> 1 BTC = $<span id="btcLast"></span></div>
-                    </div>
-
-
-
-                    <div id="hbtc" class="col-md-12 col-sm-12">
-                        <h4> Today's Highest BTC Value </h4>
-
-                        <div id=""> $ <span id="btcHigh"> </span> </div>
-                    </div>
-
-
-
-                    <div id="btc" class="col-md-12 col-sm-12">
-                        <h4> Today's Lowest BTC Value </h4>
-
-                        <div id=""> $ <span id="btcLow"> </span> </div>
-                    </div>
-
-
-                    <div id="btc" class="col-md-12 col-sm-12">
-                        <h4> Percentage Change in BTC Value 24H </h4>
-
-                        <div id=""> % <span id="btcPct"> </span> </div>
-                    </div>
-
-
-                    <div id="btc" class="col-md-12 col-sm-12">
-                        <h4> Market Cap </h4>
-
-                        <div id=""> $ <span id="btcMkc"> </span> </div>
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <br>
-
-
-    <!-- Table -->
-    <div class="container">
+<div class="container" style="">
         <div class="table-responsive">
-            <table id="table1" class="text-center table table-bordered table-striped table-hover table-sm"> </table>
+
+        <table class="table table-bordered table-striped table-hover table-sm">
+          <thead class="thead-dark text-center">
+            <tr>
+              <th scope="col">Coin</th>
+              <th scope="col">Current Value</th>
+              <th scope="col">Today's Highest</th>
+              <th scope="col">Today's Lowest</th>
+              <th scope="col"> % Change</th>
+              <th scope="col">Market Cap</th>
+
+            </tr>
+          </thead>
+          <tbody class="text-center">
+            <tr>
+              <th scope="row"><img src="../img/btc.png" height="30" width="30" class="" alt=""></th>
+              <td>
+                <div id="btc" class="">
+                    <div id="btcTicker">
+                        <span id="btcArrow"></span>
+                            $<span id="btcLast"></span>
+                    </div>
+                </div>
+              </td>
+
+              <td>
+                <div id="btc" class="">
+                    $ <span id="btcHigh"> </span>
+                 </div>
+              </td>
+              <td>
+                <div id="btc" class="">
+                    $ <span id="btcLow"> </span>
+                 </div>
+              </td>
+              <td>
+                <div id="btc" class="">
+                    <span id="btcPct"> </span> % 
+                </div>
+              </td>
+              <td>
+                <div id="btc" class="">
+                    $ <span id="btcMkc"> </span>
+                 </div>
+              </td>
+
+            </tr>
+          </tbody>
+        </table>
+    </div> <!-- resposive  -->
+</div> <!-- container  -->
+
+<!-- Line Chart-->
+    <div id="container" class="container">
+
+        <div class="row">
+            
+                <div id="" class="col-md-12"> 
+                    <h6 class="text-center"> One Year Bitcoin Prices in U.S. Dollars </h6>
+                    <div id="chart-area" class=""> </div>
+                </div>
         </div>
     </div>
-    <!-- Table End -->
+<!--Line Chart end -->
 
-
-
-    <!-- FOOTER -->
-
+         <!-- FOOTER -->
+<br>
     <footer id="main-footer" class="text-center p-4">
         <div class="container">
             <div class="row">
@@ -182,8 +173,7 @@
         </div>
     </footer>
     <!-- FOOTER End-->
-
-
+    
 
     <!-- Bootstrap core JavaScript -->
 

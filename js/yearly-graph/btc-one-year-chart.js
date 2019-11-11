@@ -1,6 +1,5 @@
 // BTC 360 days chart
 
-
 var url = "https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&limit=366&aggregate=3&e=CCCAGG";
 
 
@@ -14,9 +13,9 @@ var url = "https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&lim
 
     // set the dimensions and margins of the graph
     var margin = {top: 20, right: 20, bottom: 30, left: 50},
-    width = 600 - margin.left - margin.right,
-    height = 400 - margin.top - margin.bottom;
-
+    width = parseInt(d3.select("#chart-area").style("width")) - margin.left - margin.right,
+    height = parseInt(d3.select("#chart-area").style("height")) - margin.top - margin.bottom;
+    //height = 500 - margin.top - margin.bot
     // set the ranges
     var x = d3.scaleTime().range([0, width]);
     var y = d3.scaleLinear().range([height, 0]);
@@ -80,7 +79,7 @@ var url = "https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&lim
 
       // add the Y Axis
       svg.append("g")
-          .call(d3.axisLeft(y));
+      .call(d3.axisLeft(y));
 
        function responsivefy(svg) {
               
@@ -112,7 +111,6 @@ var url = "https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&lim
 });
 
   ////////////
-
 
 var xmlhttp = new XMLHttpRequest();
 
@@ -201,10 +199,16 @@ function timeConverter(UNIX_timestamp){
 
       $.each(data.RAW, function(key, value){
 
+        var twodigit = value.USD.MKTCAP;
+        twodigit = shortenLargeNumber(twodigit);
+
+        var twodigitper = value.USD.CHANGEPCT24HOUR;
+        twodigitper = shortenLargeNumber(twodigitper);
+
         lbtc_crypto_data += value.USD.LOWDAY;
         hbtc_crypto_data += value.USD.HIGHDAY;
-        pcbtc_crypto_data += value.USD.CHANGEPCT24HOUR;
-        mcbtc_crypto_data += value.USD.MKTCAP;
+        pcbtc_crypto_data += twodigitper;
+        mcbtc_crypto_data += twodigit;
 
       });
 
@@ -225,16 +229,21 @@ function timeConverter(UNIX_timestamp){
   .always(function() {console.log('getJSON request ended!');});
 })();
 
-  function yearTimeConverter(UNIX_timestamp){
-      var a = new Date(UNIX_timestamp * 1000);
-      var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-      var year = a.getFullYear();
-      var month = months[a.getMonth()];
-      var date = a.getDate();
 
-      var time = date + ' ' + month + ' ' + year ;
-    return time;
-  };
+/*
+ * Shorten number to thousands, millions, billions, etc.
+ * http://en.wikipedia.org/wiki/Metric_prefix */
+
+function shortenLargeNumber(num, digits) {
+
+    const abbrev = ['', 'K', 'M', 'B', 'T'];
+    const unrangifiedOrder = Math.floor(Math.log10(Math.abs(num)) / 3)
+    const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length - 1))
+    const suffix = abbrev[order];
+
+    return (num / Math.pow(10, order * 3)).toFixed(2) + suffix;
+
+}
 
 
 ///////
