@@ -151,7 +151,7 @@ var monthlyMove = ndx.dimension(function (d) {
 //console.log(monthlyMoveGroup);
 
 // summerize volume by Month
-var quarter = ndx.dimension(function (d) {
+var monthly = ndx.dimension(function (d) {
 
 var date = d.time;
 //console.log(date);
@@ -161,13 +161,13 @@ var getMonthName = month[2];
 return getMonthName;
 });
 
-//console.log(quarter);
+//console.log(monthly);
 
-var quarterGroup = quarter.group().reduceSum(function (d) {
+var monthlyGroup = monthly.group().reduceSum(function (d) {
   return d.volumeto;
 });
 
-//console.log(quarterGroup);
+//console.log(monthlyGroup);
 
 // Counts per weekday
 
@@ -236,8 +236,8 @@ gainOrLossChart
     .height(190)
     .radius(80)
     .innerRadius(30)
-    .dimension(quarter)
-    .group(quarterGroup)
+    .dimension(monthly)
+    .group(monthlyGroup)
     .legend(dc.legend().x(199).y(5).itemHeight(10).gap(3))
     //.legend(dc.legend().x(230).y(5).itemHeight(12).gap(5));
 

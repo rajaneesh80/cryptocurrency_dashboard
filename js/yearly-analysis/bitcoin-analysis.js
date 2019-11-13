@@ -13,7 +13,7 @@ if (!navigator.onLine) {
   alert('This website need to be connected to internet in order to work properly');
 }
 
-// Bitcoinn 30 days 
+// Bitcoinn 365 days 
 var url = "https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&limit=365&aggregate=1&e=CCCAGG";
 
 document.getElementById('container').style.display = 'block';
@@ -31,8 +31,8 @@ d3.json(url).get(function(error, d) {
       var dayname = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
       d.time = new Date(d.time*1000);
       //console.log(d.time)
-      d.time = dayname[d.time.getDay()]+'-'+d.time.getDate()+'-'+months[d.time.getMonth()]+'-'+d.time.getFullYear();
-      //console.log(d.time)
+      d.time = dayname[d.time.getDay()]+'-'+d.time.getDate()+'-'+months[d.time.getMonth()]+'-'+d.time.getFullYear();      //console.log(d.time)
+   
   });
     if (error) throw error;
     //console.log(data)
@@ -152,7 +152,7 @@ var monthlyMove = ndx.dimension(function (d) {
 //console.log(monthlyMoveGroup);
 
 // summerize volume by Month
-var quarter = ndx.dimension(function (d) {
+var monthly = ndx.dimension(function (d) {
 
 var date = d.time;
 //console.log(date);
@@ -164,8 +164,10 @@ return getMonthName;
 
 //console.log(quarter);
 
-var quarterGroup = quarter.group().reduceSum(function (d) {
+var monthlyGroup = monthly.group().reduceSum(function (d) {
+
   return d.volumeto;
+
 });
 
 //console.log(quarterGroup);
@@ -237,8 +239,8 @@ gainOrLossChart
     .height(190)
     .radius(80)
     .innerRadius(30)
-    .dimension(quarter)
-    .group(quarterGroup)
+    .dimension(monthly)
+    .group(monthlyGroup)
     .legend(dc.legend().x(199).y(5).itemHeight(10).gap(3))
     //.legend(dc.legend().x(230).y(5).itemHeight(12).gap(5));
 
@@ -421,10 +423,34 @@ gainOrLossChart
 
         /*apply_resizing(fluctuationChart);*/
 
+function shortenLargeNumber(num, digits) {
 
+    const abbrev = ['', 'K', 'M', 'B', 'T'];
+    const unrangifiedOrder = Math.floor(Math.log10(Math.abs(num)) / 3)
+    const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length - 1))
+    const suffix = abbrev[order];
+
+    return (num / Math.pow(10, order * 3)).toFixed(2) + suffix;
+
+}
 // #### Rendering
 dc.renderAll();
 
 
 });
+
+/*
+ * Shorten number to thousands, millions, billions, etc.
+ * http://en.wikipedia.org/wiki/Metric_prefix */
+
+function shortenLargeNumber(num, digits) {
+
+    const abbrev = ['', 'K', 'M', 'B', 'T'];
+    const unrangifiedOrder = Math.floor(Math.log10(Math.abs(num)) / 3)
+    const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length - 1))
+    const suffix = abbrev[order];
+
+    return (num / Math.pow(10, order * 3)).toFixed(2) + suffix;
+
+}
 
