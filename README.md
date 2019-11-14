@@ -176,17 +176,18 @@ Home page:
     2. hyperlinks are showing correct scope dates on charts after the click.
 
 Table page:
+
     make sure; the table is showing correct below values for each coin 
 
-   1. COIN ID
-   2. ICON
-   3. Current Price
-   4. 24H High
-   5. 24H Low
-   6. Market Cap
-   7. % CHANGE In 24H
-   8. Supply
-   9. 7-Day's Chart $
+       1. COIN ID
+       2. ICON
+       3. Current Price
+       4. 24H High
+       5. 24H Low
+       6. Market Cap
+       7. % CHANGE In 24H
+       8. Supply
+       9. 7-Day's Chart $
 
 
 graph and analyse page:
@@ -206,7 +207,7 @@ GitHub was used for version control and to host the code by pushing all code to 
 
 This project was then deployed on GitHub Pages by simply accessing the project's settings page then selecting the Master branch in the drop-down menu for deploying the project on GitHub Pages.
 
-The live project can be viewed[here](https://rajaneesh80.github.io/cryptocurrency_dashboard/index.html/).
+The live project can be viewed [here](https://rajaneesh80.github.io/cryptocurrency_dashboard/index.html).
 
 If you wish to run this site locally, please clone or download this repo. You can then run index.html or open index.html in your browser.
 
