@@ -144,7 +144,7 @@ This project was developed incrementally with continuous use of `console.log` to
 
 This project was tested for responsiveness using the Chrome Developer Tools mobile device simulator. 
 
-It was also viewed on physical Apple 10, 8, 7 , 6 and 5 mobile device to ensure proper, responsive behaviour. 
+It was also viewed on physical Apple 10, 8, 7, 6 and 5 mobile device to ensure proper, responsive behaviour, and the screenshots added to the responsive test folder.
 
 The site was also tested in Mozilla Firefox (version 70.0.1) and Microsoft Edge (44.18362.387.0) browsers to ensure appearance and functionality of the site was as expected across all 3 of these browsers.
 

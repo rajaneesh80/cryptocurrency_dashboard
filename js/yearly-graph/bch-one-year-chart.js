@@ -1,20 +1,25 @@
 // Bitcoin - Cash  360 days chart
-
-
 var url = "https://min-api.cryptocompare.com/data/histoday?fsym=BCH&tsym=USD&limit=365&aggregate=1&e=CCCAGG";
 
 
-  d3.json(url).get(function(error, d) {
+d3.json(url).get(function(error, d) {
 
     var data = d.Data;
-    data.forEach(function(d){ d.time = new Date(d.time * 1000) });
+    data.forEach(function(d) {
+        d.time = new Date(d.time * 1000)
+    });
 
     if (error) throw error;
-    
+
     // set the dimensions and margins of the graph
-    var margin = {top: 20, right: 20, bottom: 30, left: 50},
-    width = parseInt(d3.select("#chart-area").style("width")) - margin.left - margin.right,
-    height = parseInt(d3.select("#chart-area").style("height")) - margin.top - margin.bottom;
+    var margin = {
+            top: 20,
+            right: 20,
+            bottom: 30,
+            left: 50
+        },
+        width = parseInt(d3.select("#chart-area").style("width")) - margin.left - margin.right,
+        height = parseInt(d3.select("#chart-area").style("height")) - margin.top - margin.bottom;
     //height = 500 - margin.top - margin.bot
     // set the ranges
     var x = d3.scaleTime().range([0, width]);
@@ -22,12 +27,16 @@ var url = "https://min-api.cryptocompare.com/data/histoday?fsym=BCH&tsym=USD&lim
 
     // define the line
     var valueline = d3.line()
-    .x(function(d) { return x(d.time); })
-    .y(function(d) { return y(d.close); });
+        .x(function(d) {
+            return x(d.time);
+        })
+        .y(function(d) {
+            return y(d.close);
+        });
 
     var div = d3.select("body").append("div")
-    .attr("class", "tooltip")
-    .style("opacity", 0);
+        .attr("class", "tooltip")
+        .style("opacity", 0);
 
     // append the svg obgect to the body of the page
     // appends a 'group' element to 'svg'
@@ -38,197 +47,206 @@ var url = "https://min-api.cryptocompare.com/data/histoday?fsym=BCH&tsym=USD&lim
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform",
-              "translate(" + margin.left + "," + margin.top + ")")
+            "translate(" + margin.left + "," + margin.top + ")")
         .call(responsivefy);
 
-      // scale the range of the data
-      x.domain(d3.extent(data, function(d) { return d.time; }));
-      y.domain([0, d3.max(data, function(d) { return d.close; })]);
+    // scale the range of the data
+    x.domain(d3.extent(data, function(d) {
+        return d.time;
+    }));
+    y.domain([0, d3.max(data, function(d) {
+        return d.close;
+    })]);
 
-   // add the valueline path.
+    // add the valueline path.
     svg.append("path")
-     .data([data])
-     .attr("class", "line")
-     .attr("d", valueline);
+        .data([data])
+        .attr("class", "line")
+        .attr("d", valueline);
 
     // add the dots with tooltips
     svg.selectAll("dot")
-     .data(data)
-     .enter().append("circle")
-     .attr("r", 3)
-     .attr("cx", function(d) { return x(d.time); })
-     .attr("cy", function(d) { return y(d.close); })
-     .on("mouseover", function(d) {
-       div.transition()
-         .duration(200)
-         .style("opacity", .9);
-       div.html(d.time.toLocaleDateString() + "<br/>" + "£"+ d.close)
-         .style("left", (d3.event.pageX) + "px")
-         .style("top", (d3.event.pageY - 28) + "px");
-       })
-      .on("mouseout", function(d) {
-        div.transition()
-         .duration(500)
-         .style("opacity", 0);
-       });
+        .data(data)
+        .enter().append("circle")
+        .attr("r", 3)
+        .attr("cx", function(d) {
+            return x(d.time);
+        })
+        .attr("cy", function(d) {
+            return y(d.close);
+        })
+        .on("mouseover", function(d) {
+            div.transition()
+                .duration(200)
+                .style("opacity", .9);
+            div.html(d.time.toLocaleDateString() + "<br/>" + "£" + d.close)
+                .style("left", (d3.event.pageX) + "px")
+                .style("top", (d3.event.pageY - 28) + "px");
+        })
+        .on("mouseout", function(d) {
+            div.transition()
+                .duration(500)
+                .style("opacity", 0);
+        });
 
-        // add the X Axis
-      svg.append("g")
-          .attr("transform", "translate(0," + height + ")")
-          .call(d3.axisBottom(x));
+    // add the X Axis
+    svg.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x));
 
-      // add the Y Axis
-      svg.append("g")
-      .call(d3.axisLeft(y));
+    // add the Y Axis
+    svg.append("g")
+        .call(d3.axisLeft(y));
 
-       function responsivefy(svg) {
-              
-            // Container is the DOM element, svg is appended. 
-            // Then we measure the container and find its 
-            // aspect ratio. 
-            const container = d3.select(svg.node().parentNode), 
-                width = parseInt(svg.style('width'), 12), 
-                height = parseInt(svg.style('height'), 10), 
-                aspect = width / height; 
-                  
-            // Add viewBox attribute to set the value to initial size 
-            // add preserveAspectRatio attribute to specify how to scale  
-            // and call resize so that svg resizes on page load 
+    function responsivefy(svg) {
 
-            svg.attr('viewBox', `0 0 ${width} ${height}`). 
-            attr('preserveAspectRatio', 'xMinYMid'). 
-            call(resize); 
-              
-            d3.select(window).on('resize.' + container.attr('id'), resize); 
-   
-            function resize() { 
-                const targetWidth = parseInt(container.style('width')); 
-                svg.attr('width', targetWidth); 
-                svg.attr('height', Math.round(targetWidth / aspect)); 
-            } 
-        } 
+        // Container is the DOM element, svg is appended. 
+        // Then we measure the container and find its 
+        // aspect ratio. 
+        const container = d3.select(svg.node().parentNode),
+            width = parseInt(svg.style('width'), 12),
+            height = parseInt(svg.style('height'), 10),
+            aspect = width / height;
+
+        // Add viewBox attribute to set the value to initial size 
+        // add preserveAspectRatio attribute to specify how to scale  
+        // and call resize so that svg resizes on page load 
+
+        svg.attr('viewBox', `0 0 ${width} ${height}`).
+        attr('preserveAspectRatio', 'xMinYMid').
+        call(resize);
+
+        d3.select(window).on('resize.' + container.attr('id'), resize);
+
+        function resize() {
+            const targetWidth = parseInt(container.style('width'));
+            svg.attr('width', targetWidth);
+            svg.attr('height', Math.round(targetWidth / aspect));
+        }
+    }
 
 
 });
 
-  ////////////
+////////////
 
 
 var xmlhttp = new XMLHttpRequest();
 
-  var url = "https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,BCH,EOS,BCH,LTC,XRP&tsyms=USD";
-  var urlHistoricalBtc = "https://min-api.cryptocompare.com/data/histominute?fsym=BCH&tsym=USD&limit=1";
-  
-      xmlhttp.onreadystatechange = function() {
-          if (this.readyState == 4  &&  this.status == 200) {
-                  var json = JSON.parse(this.responseText);
-                  parseJsonFromCryptoCompare(json);
-                }       
-              };
-              
-      xmlhttp.open("GET", url, true);
-      xmlhttp.send();
+var url = "https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,BCH,EOS,BCH,LTC,XRP&tsyms=USD";
+var urlHistoricalBtc = "https://min-api.cryptocompare.com/data/histominute?fsym=BCH&tsym=USD&limit=1";
+
+xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        var json = JSON.parse(this.responseText);
+        parseJsonFromCryptoCompare(json);
+    }
+};
+
+xmlhttp.open("GET", url, true);
+xmlhttp.send();
 
 function parseJsonFromCryptoCompare(json) {
-  var time = "<i>Last Updated : " + Date() + "</i>";
-  var bchereum = json["BCH"]["USD"];
+    var time = "<i>Last Updated : " + Date() + "</i>";
+    var bchereum = json["BCH"]["USD"];
 
-  document.getElementById("bchLast").innerHTML = bchereum;
-  document.getElementById("lastUpdated").innerHTML = time;
-                
-  colorText("bchLast",urlHistoricalBtc);
+    document.getElementById("bchLast").innerHTML = bchereum;
+    document.getElementById("lastUpdated").innerHTML = time;
+
+    colorText("bchLast", urlHistoricalBtc);
 
 }
-              
+
 
 function colorText(elementId, url) {
-  var xmlhttp = new XMLHttpRequest();
-  xmlhttp.onreadystatechange = function() {
-    if (this.readyState == 4  &&  this.status == 200) {
-      var json = JSON.parse(this.responseText);
-      updateColors(json, elementId);
-    }
-  };
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var json = JSON.parse(this.responseText);
+            updateColors(json, elementId);
+        }
+    };
 
-  xmlhttp.open("GET", url, true);
-  xmlhttp.send();
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
 
     function updateColors(json, elementId) {
 
-      if (elementId == "bchLast") {
-        var oldVal = json["Data"][0]["close"];
-        if (Number(oldVal) < Number(document.getElementById("bchLast").innerHTML)) {
-          $("#bchTicker").css("color", "green");
-          document.getElementById("bchArrow").innerHTML = "<img src='../img/arrow-g.png' style='max-width:12px;'>";
+        if (elementId == "bchLast") {
+            var oldVal = json["Data"][0]["close"];
+            if (Number(oldVal) < Number(document.getElementById("bchLast").innerHTML)) {
+                $("#bchTicker").css("color", "green");
+                document.getElementById("bchArrow").innerHTML = "<img src='../img/arrow-g.png' style='max-width:12px;'>";
+            } else {
+                $("#bchTicker").css("color", "red");
+                document.getElementById("bchArrow").innerHTML = "<img src='../img/arrow-r.png' style='max-width:12px;'>";
+            }
+        } else {
+            alert("ERROR: " + elementId);
         }
-        else {
-          $("#bchTicker").css("color", "red");
-          document.getElementById("bchArrow").innerHTML = "<img src='../img/arrow-r.png' style='max-width:12px;'>";
-        }
-      }
 
-      else {
-        alert("ERROR: " + elementId);
-      }
-                  
-  }
+    }
 };
 
-function timeConverter(UNIX_timestamp){
-  var a = new Date(UNIX_timestamp * 1000);
-  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  var year = a.getFullYear();
-  var month = months[a.getMonth()];
-  var date = a.getDate();
-  var hour = a.gbchours();
-  var min = a.getMinutes() < 10 ? '0' + a.getMinutes() : a.getMinutes();
-  var sec = a.getSeconds() < 10 ? '0' + a.getSeconds() : a.getSeconds();
-  var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+function timeConverter(UNIX_timestamp) {
+    var a = new Date(UNIX_timestamp * 1000);
+    var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    var year = a.getFullYear();
+    var month = months[a.getMonth()];
+    var date = a.getDate();
+    var hour = a.gbchours();
+    var min = a.getMinutes() < 10 ? '0' + a.getMinutes() : a.getMinutes();
+    var sec = a.getSeconds() < 10 ? '0' + a.getSeconds() : a.getSeconds();
+    var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec;
     return time;
 }
 
 (function getData() {
-  var url = "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BCH&tsyms=USD";
-  url = encodeURI(url);
-  console.log(url);
+    var url = "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BCH&tsyms=USD";
+    url = encodeURI(url);
+    console.log(url);
 
-  $.getJSON(url,function(data) {
+    $.getJSON(url, function(data) {
 
-      var hbchcrypto_data = '';
-      var lbchcrypto_data = '';
-      var pcbchcrypto_data = '';
-      var mcbchcrypto_data = '';
+            var hbchcrypto_data = '';
+            var lbchcrypto_data = '';
+            var pcbchcrypto_data = '';
+            var mcbchcrypto_data = '';
 
-      $.each(data.RAW, function(key, value){
+            $.each(data.RAW, function(key, value) {
 
-        var twodigit = value.USD.MKTCAP;
-        twodigit = shortenLargeNumber(twodigit);
+                var twodigit = value.USD.MKTCAP;
+                twodigit = shortenLargeNumber(twodigit);
 
-        var twodigitper = value.USD.CHANGEPCT24HOUR;
-        twodigitper = shortenLargeNumber(twodigitper);
+                var twodigitper = value.USD.CHANGEPCT24HOUR;
+                twodigitper = shortenLargeNumber(twodigitper);
 
-        lbchcrypto_data += value.USD.LOWDAY;
-        hbchcrypto_data += value.USD.HIGHDAY;
-        pcbchcrypto_data += twodigitper;
-        mcbchcrypto_data += twodigit;
+                lbchcrypto_data += value.USD.LOWDAY;
+                hbchcrypto_data += value.USD.HIGHDAY;
+                pcbchcrypto_data += twodigitper;
+                mcbchcrypto_data += twodigit;
 
-      });
+            });
 
-      $('#bchHigh').html(hbchcrypto_data);
-      $('#bchLow').html(lbchcrypto_data);
-      $('#bchPct').html(pcbchcrypto_data);
-      $('#bchMkc').html(mcbchcrypto_data);
+            $('#bchHigh').html(hbchcrypto_data);
+            $('#bchLow').html(lbchcrypto_data);
+            $('#bchPct').html(pcbchcrypto_data);
+            $('#bchMkc').html(mcbchcrypto_data);
 
-    })
+        })
 
-  .done(function() {console.log('getJSON request succeeded'); })
+        .done(function() {
+            console.log('getJSON request succeeded');
+        })
 
-  .fail(function(jqXHR, textStatus, errorThrown) {
-  console.log('getJSON request failed! ' + textStatus);
-  console.log("incoming"+jqXHR.responseText);
-  })
+        .fail(function(jqXHR, textStatus, errorThrown) {
+            console.log('getJSON request failed! ' + textStatus);
+            console.log("incoming" + jqXHR.responseText);
+        })
 
-  .always(function() {console.log('getJSON request ended!');});
+        .always(function() {
+            console.log('getJSON request ended!');
+        });
 })();
 
 
@@ -249,4 +267,3 @@ function shortenLargeNumber(num, digits) {
 
 
 ///////
-
