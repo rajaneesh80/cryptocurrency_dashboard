@@ -102,6 +102,13 @@ svg {
   stroke-width: 1px;
 }
 
+#fluctuation-chart
+  {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1px;
+}
+
 div.tooltip {
   position: absolute;
   text-align: center;
